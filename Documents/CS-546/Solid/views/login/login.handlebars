@@ -1,0 +1,20 @@
+<h1>Login</h1>
+<form id="login-form" action="/login" method="POST">
+    <label for="username">
+        <input type="text" id="username" name="username" placeholder="Username" />
+    </label>
+    <label for="password">
+        <input type="text" id="password" name="password" placeholder="Password" />
+    </label>
+    <button type="submit" value="Submit">
+        Submit
+    </button>
+
+</form>
+{{#if error}}
+<h2>Incorrect username or password </h2>
+{{/if}}
+{{#if loggedOut}}
+<h2>You have been successfully logged out!</h2>
+{{/if}}
+<a href="/signup">Don't have an account? Sign up now for free!</a>
