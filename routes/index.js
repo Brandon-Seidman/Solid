@@ -4,7 +4,6 @@ const signup = require("./signup");
 const private = require("./private");
 const mainview = require("./mainview");
 const search = require("./search");
-const solids = require("./solids");
 
 let logging = function (req, res, next) {
   let date = new Date().toUTCString();
@@ -28,7 +27,6 @@ const constructorMethod = (app) => {
   app.use("/private", private);
   app.use("/mainview", mainview);
   app.use("/search", search);
-  app.use("/solids", solids);
   app.use(logging);
   app.get("/", (req, res) => {
     if (!req.cookies.AuthCookie) {
