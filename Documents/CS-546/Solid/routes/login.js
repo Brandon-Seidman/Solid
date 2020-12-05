@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const bcrypt = require("bcrypt");
+//const bcrypt = require("bcrypt");
 const users = require("../users");
 
 let logging = function (req, res, next) {
@@ -22,34 +22,38 @@ router.post("/", async (req, res) => {
   try {
     const { username, password } = req.body;
 
-    let hashedPassword = "";
-    let user;
-    for (let i = 0; i < users.length; i++) {
-      if (users[i].username === username)
-        hashedPassword = users[i].hashedPassword;
-      user = users[i];
-    }
-    if (hashedPassword === "") {
-      res.status(401).render("login/login.handlebars", {
-        title: "Login",
-        error: true,
-      });
-      return;
-    }
-    bcrypt.compare(password, hashedPassword, (err, response) => {
-      if (err) {
-        res
-          .status(401)
-          .render("login/login.handlebars", { title: "Login", error: true });
-      }
-      if (response) {
-        res.cookie("AuthCookie", username);
-        res.redirect("/private");
-      } else {
-        res
-          .status(401)
-          .render("login/login.handlebars", { title: "Login", error: true });
-      }
+    // let hashedPassword = "";
+    // let user;
+    // for (let i = 0; i < users.length; i++) {
+    //   if (users[i].username === username)
+    //     hashedPassword = users[i].hashedPassword;
+    //   user = users[i];
+    // }
+    // if (hashedPassword === "") {
+    //   res.status(401).render("login/login.handlebars", {
+    //     title: "Login",
+    //     error: true,
+    //   });
+    //   return;
+    // }
+    // bcrypt.compare(password, hashedPassword, (err, response) => {
+    //   if (err) {
+    //     res
+    //       .status(401)
+    //       .render("login/login.handlebars", { title: "Login", error: true });
+    //   }
+    //   if (response) {
+    //     res.cookie("AuthCookie", username);
+    //     res.redirect("/private");
+    //   } else {
+    //     res
+    //       .status(401)
+    //       .render("login/login.handlebars", { title: "Login", error: true });
+    //   }
+    // });
+    res.status(401).render("login/login.handlebars", {
+      title: "Login",
+      error: true,
     });
   } catch (e) {
     res

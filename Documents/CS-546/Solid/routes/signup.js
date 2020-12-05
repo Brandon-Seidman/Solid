@@ -13,13 +13,13 @@ router.post("/", async (req, res) => {
     const { email, username, password, passwordCheck } = req.body;
     console.log(password);
     console.log(passwordCheck);
-    if (password !== passwordCheck) {
-      res.status(401).render("login/signup.handlebars", {
-        title: "Sign Up",
-        passNoMatch: true,
-      });
-      return;
-    }
+    // if (password !== passwordCheck) {
+    //   res.status(401).render("login/signup.handlebars", {
+    //     title: "Sign Up",
+    //     passNoMatch: true,
+    //   });
+    //   return;
+    // }
 
     // CHECK IF EMAIL IS IN DATABASE
 
