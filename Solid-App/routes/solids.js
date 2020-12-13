@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const solids = require("../data/solids");
-let { ObjectID } = require('mongodb');
+const uuid = require('uuid');
 
 function isValidString(string) {
     if (!string) return false;
@@ -11,13 +11,8 @@ function isValidString(string) {
 }
 
 function isValidId(string) {
-    if (!isValidString) return false;
-    try {
-        const parsedId = ObjectId(string);
-        return true;
-    } catch (e) {
-        return false;
-    }
+    if (!isValidString(string)) return false;
+    return uuid.validate(string)
 }
 
 router.get("/:id", async (req, res) => {
