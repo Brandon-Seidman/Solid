@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const users = require("../users");
+
 let logging = function (req, res, next) {
   let date = new Date().toUTCString();
   let method = req.method;
