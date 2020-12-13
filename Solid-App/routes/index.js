@@ -2,6 +2,7 @@ const login = require("./login");
 const logout = require("./logout");
 const signup = require("./signup");
 const private = require("./private");
+const solids = require("./solids");
 
 let logging = function (req, res, next) {
   let date = new Date().toUTCString();
@@ -23,6 +24,7 @@ const constructorMethod = (app) => {
   app.use("/logout", logout);
   app.use("/signup", signup);
   app.use("/private", private);
+  app.use("/solids", solids);
   app.use(logging);
   app.get("/", (req, res) => {
     if (!req.cookies.AuthCookie) {

@@ -6,7 +6,7 @@ const uuid = require('uuid');
 function isValidString(string) {
     if (!string) return false;
     if (typeof(string) !== 'string') return false;
-    if (string.trim().length === 0) return false;
+    if (string.trim() === '') return false;
     return true;
 }
 
