@@ -63,9 +63,9 @@ let exportedMethods = {
 	if(password)
 		if (typeof password !== 'string') throw "password must be a string";
 	if(email)
-		if (typeof email !== 'string') throw "email must be a boolean";
+		if (typeof email !== 'string') throw "email must be a string";
 	if(solidsCreated)
-		if (!Array.isArray(solidsCreated)) throw "solidsCreated must be a boolean";
+		if (!Array.isArray(solidsCreated)) throw "solidsCreated must be a Array";
 
     const userUpdateInfo = {
       name: name,

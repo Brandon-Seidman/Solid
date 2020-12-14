@@ -17,16 +17,16 @@ let exportedMethods = {
     return buddy;
   },
   
-  async addBuddy(name,username,password,email,solidsCreated) {
+  async addBuddy(name,username,password,email,solidsCompleted) {
 	 
-	if(!name || !username || !password || !email || !solidsCreated)
+	if(!name || !username || !password || !email || !solidsCompleted)
 		throw "Please provide all data when creating a buddy account";
 		
 	if (typeof name !== 'string') throw "name must be a string";
 	if (typeof username !== 'string') throw "username must be a string";
 	if (typeof password !== 'string') throw "password must be a string";
 	if (typeof email !== 'string') throw "email must be a string";
-	if (Number.isInteger(solidsCreated)) throw "solidsCreated must be a number";
+	if (!Number.isInteger(solidsCompleted)) throw "solidsCompleted must be a number";
 	  
 	  
     const buddyCollection = await buddies();
@@ -36,7 +36,7 @@ let exportedMethods = {
       username: username,
 	  password: password,
 	  email:email,
-	  solidsCreated: solidsCreated,
+	  solidsCompleted: solidsCompleted,
       _id: uuid.v4()
     };
 
@@ -54,8 +54,8 @@ let exportedMethods = {
     return true;
   },
   
-  async updateBuddy(id, name,username,password,email,solidsCreated) {
-	if(!name || !username || !password || !email || !solidsCreated)
+  async updateBuddy(id, name,username,password,email,solidsCompleted) {
+	if(!name || !username || !password || !email || !solidsCompleted)
 		throw "Please provide all data when creating a buddy account";
 		
 	if(name)
@@ -66,8 +66,8 @@ let exportedMethods = {
 		if (typeof password !== 'string') throw "password must be a string";
 	if(email)
 		if (typeof email !== 'string') throw "email must be a string";
-	if(solidsCreated)
-		if (Number.isInteger(solidsCreated)) throw "solidsCreated must be a number";
+	if(solidsCompleted)
+		if (!Number.isInteger(solidsCompleted)) throw "solidsCompleted must be a number";
     const buddy = await this.getBuddyById(id);
     console.log(buddy);
 
@@ -76,7 +76,7 @@ let exportedMethods = {
       username: username,
 	  password: password,
 	  email: email,
-	  solidsCreated: solidsCreated
+	  solidsCompleted: solidsCompleted
     };
 
     const buddyCollection = await buddies();
