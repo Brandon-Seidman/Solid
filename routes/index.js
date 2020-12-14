@@ -2,6 +2,8 @@ const login = require("./login");
 const logout = require("./logout");
 const signup = require("./signup");
 const private = require("./private");
+const mainview = require("./mainview");
+const search = require("./search");
 const solids = require("./solids");
 
 let logging = function (req, res, next) {
@@ -24,6 +26,8 @@ const constructorMethod = (app) => {
   app.use("/logout", logout);
   app.use("/signup", signup);
   app.use("/private", private);
+  app.use("/mainview", mainview);
+  app.use("/search", search);
   app.use("/solids", solids);
   app.use(logging);
   app.get("/", (req, res) => {
