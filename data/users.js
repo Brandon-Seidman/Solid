@@ -20,6 +20,16 @@ let exportedMethods = {
   async addUser(name,username,password,email,solidsCreated) {
     const userCollection = await users();
 
+	if(!name || !username || !password || !email|| !solidsCreated)
+		throw "Please provide all data when creating a user";
+
+	if (typeof name !== 'string') throw "name must be a string";
+	if (typeof username !== 'string') throw "username must be a string";
+	if (typeof password !== 'string') throw "password must be a string";
+	if (typeof email !== 'string') throw "email must be a string";
+	if (!Array.isArray(solidsCreated)) throw "solidsCreated must be a Array";
+	
+
     let newUser = {
       name: name,
       username: username,
@@ -46,6 +56,16 @@ let exportedMethods = {
   async updateUser(id, name,username,password,email,solidsCreated) {
     const user = await this.getUserById(id);
     console.log(user);
+	if(name)
+		if (typeof name !== 'string') throw "name must be a string";
+	if(username)
+		if (typeof username !== 'string') throw "username must be a string";
+	if(password)
+		if (typeof password !== 'string') throw "password must be a string";
+	if(email)
+		if (typeof email !== 'string') throw "email must be a boolean";
+	if(solidsCreated)
+		if (!Array.isArray(solidsCreated)) throw "solidsCreated must be a boolean";
 
     const userUpdateInfo = {
       name: name,

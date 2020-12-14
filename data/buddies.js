@@ -18,6 +18,17 @@ let exportedMethods = {
   },
   
   async addBuddy(name,username,password,email,solidsCreated) {
+	 
+	if(!name || !username || !password || !email || !solidsCreated)
+		throw "Please provide all data when creating a buddy account";
+		
+	if (typeof name !== 'string') throw "name must be a string";
+	if (typeof username !== 'string') throw "username must be a string";
+	if (typeof password !== 'string') throw "password must be a string";
+	if (typeof email !== 'string') throw "email must be a string";
+	if (Number.isInteger(solidsCreated)) throw "solidsCreated must be a number";
+	  
+	  
     const buddyCollection = await buddies();
 
     let newBuddy = {
@@ -44,6 +55,19 @@ let exportedMethods = {
   },
   
   async updateBuddy(id, name,username,password,email,solidsCreated) {
+	if(!name || !username || !password || !email || !solidsCreated)
+		throw "Please provide all data when creating a buddy account";
+		
+	if(name)
+		if (typeof name !== 'string') throw "name must be a string";
+	if(username)
+		if (typeof username !== 'string') throw "username must be a string";
+	if(password)
+		if (typeof password !== 'string') throw "password must be a string";
+	if(email)
+		if (typeof email !== 'string') throw "email must be a string";
+	if(solidsCreated)
+		if (Number.isInteger(solidsCreated)) throw "solidsCreated must be a number";
     const buddy = await this.getBuddyById(id);
     console.log(buddy);
 
