@@ -15,6 +15,8 @@ app.use(express.urlencoded({ extended: true }));
 
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
+app.set("views", path.join(__dirname, "views"));
+
 configRoutes(app);
 app.use(
   session({
