@@ -18,6 +18,14 @@ let exportedMethods = {
   async addComment(commentBy, description, solid, timestamp ) {
     const commentCollection = await comments();
    
+   if(!commentBy || !description || !solid || !timestamp)
+		throw "Please provide all data when creating a comment";
+		
+	if (typeof commentBy !== 'string') throw "commentBy must be a string";
+	if (typeof description !== 'string') throw "description must be a string";
+	if (typeof solid !== 'string') throw "solid must be a string";
+	if (typeof email !== 'email') throw "email must be a string";
+	if (typeof timestamp !== 'object') throw "timestamp must be a date";
 
     let newComment = {
 		commentBy: commentBy,
@@ -41,7 +49,15 @@ let exportedMethods = {
   },
   async updateComment(id, commentBy, description, solid, timestamp) {
     const commentCollection = await comments();
-
+	if(commentBy)
+		if (typeof commentBy !== 'string') throw "commentBy must be a string";
+	if(description)
+		if (typeof description !== 'string') throw "description must be a string";
+	if(solid)
+		if (typeof solid !== 'string') throw "solid must be a string";
+	if(timestamp)
+		if (typeof timestamp !== 'object') throw "timestamp must be a date";
+	
     let updatedComment = {
       	commentBy: commentBy,
 		description: description,
