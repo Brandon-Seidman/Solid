@@ -1,0 +1,24 @@
+<h1>Login</h1>
+<form id="login-form">
+    <label for="username">
+        <input type="text" id="username" name="username" placeholder="Username" />
+    </label>
+    <label for="password">
+        <input type="password" id="password" name="password" placeholder="Password" />
+    </label>
+    <button type="submit" value="Submit">
+        Submit
+    </button>
+
+</form>
+
+<div id="messages">
+    {{#if error}}
+    <h2>Incorrect username or password </h2>
+    {{/if}}
+    {{#if loggedOut}}
+    <h2>You have been successfully logged out!</h2>
+    {{/if}}
+</div>
+<a href="/signup">Don't have an account? Sign up now for free!</a>
+<script type="text/javascript" src="../../public/js/login.js"></script>

@@ -1,0 +1,39 @@
+<h1>Sign Up Today!</h1>
+<div>
+    <form id="signup-form" method="POST">
+        <label for="email">
+            <input type="text" id="email" name="email" placeholder="Email" />
+        </label>
+        <label for="username">
+            <input type="text" id="username" name="username" placeholder="Username" />
+        </label>
+        <label for="password">
+            <input type="password" id="password" name="password" placeholder="Password" />
+        </label>
+        <label for="password">
+            <input type="password" id="passwordCheck" name="passwordCheck" placeholder="Re-enter Password" />
+        </label>
+        <button type="submit" value="Submit">
+            Submit
+        </button>
+
+        {{#if error}}
+        <h2>Invalid Username or Password </h2>
+        {{/if}}
+        {{#if passNoMatch}}
+        <h2> Passwords do not match </h2>
+        {{/if}}
+        {{#if takenUser}}
+        <h2>Woops! Username already taken</h2>
+        {{/if}}
+        {{#if takenEmail}}
+        <h2>Woops! Email already taken</h2>
+        {{/if}}
+
+    </form>
+</div>
+<div id="messages"></div>
+<div>
+    <a href="/">Aleady have an account? Log in here!</a>
+</div>
+<script type="text/javascript" src="../../public/js/signup.js"></script>
