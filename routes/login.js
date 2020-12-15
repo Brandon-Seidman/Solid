@@ -14,7 +14,7 @@ router.post("/", async (req, res) => {
     const db = await dbConnection();
 
     const users = await userData.getAllUsers();
-    console.log(users);
+
     let hashedPassword = "";
     let user;
     for (let i = 0; i < users.length; i++) {

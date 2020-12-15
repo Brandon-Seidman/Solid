@@ -32,20 +32,25 @@ async function main() {
         return;
       }
       bcrypt.hash(password, salt, async function (err, hash) {
-        console.log(
-          `Name: ${name}, User: ${username}, HashedPAssword: ${username}, email: ${email}`
-        );
-        let newUser = await userData.addUser(
-          name,
-          username,
-          hash,
-          email,
-          solids_made,
-          0,
-          false
-        );
-        usersArray.push(newUser);
-        return newUser;
+        try {
+          console.log(
+            `Name: ${name}, User: ${username}, HashedPAssword: ${hash}, email: ${email}`
+          );
+          let newUser = await userData.addUser(
+            name,
+            username,
+            hash,
+            email,
+            solids_made,
+            0,
+            false
+          );
+          usersArray.push(newUser);
+
+          return newUser;
+        } catch (e) {
+          console.log(e);
+        }
       });
     });
     return;
