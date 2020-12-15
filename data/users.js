@@ -39,9 +39,13 @@ let exportedMethods = {
       _id: uuid.v4(),
     };
 
-    const newInsertInformation = await userCollection.insertOne(newUser);
-    if (newInsertInformation.insertedCount === 0) throw "Insert failed!";
-    return await this.getUserById(newInsertInformation.insertedId);
+    try {
+      const newInsertInformation = await userCollection.insertOne(newUser);
+      if (newInsertInformation.insertedCount === 0) throw "Insert failed!";
+      return await this.getUserById(newInsertInformation.insertedId);
+    } catch (e) {
+      console.log(e);
+    }
   },
 
   async removeUser(id) {
