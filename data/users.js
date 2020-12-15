@@ -67,7 +67,7 @@ let exportedMethods = {
 		if (typeof password !== 'string') throw "password must be a string";
 	if(email)
 		if (typeof email !== 'string') throw "email must be a string";
-	if(solidsCreated)
+	if(solidsCreated!==null)
 		if (!Array.isArray(solidsCreated)) throw "solidsCreated must be a Array";
 	if(solidsCompleted)
 		if (!Number.isInteger(solidsCompleted)) throw "solidsCompleted must be a number";
