@@ -7,6 +7,7 @@ const mainview = require("./mainview");
 const search = require("./search");
 const userData = require("../data/users");
 const dbConnection = require("../config/mongoConnection");
+//const post = require("./post");
 
 const constructorMethod = (app) => {
   app.use("/login", login);

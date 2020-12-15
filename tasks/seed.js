@@ -6,6 +6,7 @@ const solidData = data.solids;
 const commentData = data.comments;
 const bcrypt = require("bcrypt");
 
+
 async function populateUsers() {
 //**** Encrypts given password and adds new user to the database */
 async function create(
@@ -16,7 +17,7 @@ async function create(
     solids_made,
     userData
   ) {
-    const saltRounds = 10;
+    let saltRounds = 10;
     await bcrypt.genSalt(saltRounds, async function (err, salt) {
       if (err) {
         console.log(err);
