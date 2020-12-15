@@ -1,23 +1,15 @@
-const users = require("../data/users");
-const solids = require("../data/solids");
-const comments = require("../data/comments");
-
 const dbConnection = require("../config/mongoConnection");
 
 const data = require("../data");
 const userData = data.users;
+const solidData = data.solids;
+const commentData = data.comments;
 const bcrypt = require("bcrypt");
-const saltRounds = 16;
 
-async function main() {
-  const db = await dbConnection();
-  await db.dropDatabase();
-  //**** Encrypts given password and adds new user to the database */
 
-  // Generate Users
-  let usersArray = [];
-
-  async function create(
+async function populateUsers() {
+//**** Encrypts given password and adds new user to the database */
+async function create(
     name,
     username,
     password,
@@ -32,25 +24,14 @@ async function main() {
         return;
       }
       bcrypt.hash(password, salt, async function (err, hash) {
-        try {
-          console.log(
-            `Name: ${name}, User: ${username}, HashedPAssword: ${hash}, email: ${email}`
-          );
-          let newUser = await userData.addUser(
-            name,
-            username,
-            hash,
-            email,
-            solids_made,
-            0,
-            false
-          );
-          usersArray.push(newUser);
-
-          return newUser;
-        } catch (e) {
-          console.log(e);
-        }
+        let newUser = await userData.addUser(
+          name,
+          username,
+          hash,
+          email,
+          solids_made
+        );
+        return newUser;
       });
     });
     return;
@@ -58,7 +39,7 @@ async function main() {
 
   // **** POPULATE DATABASE WITH USERS **** //
 
-  await create(
+  const temp = await create(
     "Shannon Hobby", // FULL NAME
     "shobby", // USERNAME
     "beepbooplettuce", // PASSWORD
@@ -66,6 +47,8 @@ async function main() {
     [], // SOLIDS CREATED
     userData
   );
+
+  console.log(temp);
 
   await create(
     "Dall Falkinder",
@@ -155,58 +138,68 @@ async function main() {
     [],
     userData
   );
-  console.log("Database successfully seeded!");
 
-  // Generate Solids
-  let solidsArray = [];
-  for (user of usersArray) {
-    let userSolids = [];
-    userSolids[0] = await solids.addSolid(
-      "07030",
-      `${user.username}'s Solid 1`,
-      user._id,
-      false,
-      false,
-      [],
-      "None",
-      300,
-      new Date(),
-      ["laundry", "errands"]
-    );
-    userSolids[1] = await solids.addSolid(
-      "07030",
-      `${user.username}'s Solid 2`,
-      user._id,
-      false,
-      false,
-      [],
-      "None",
-      300,
-      new Date(),
-      ["laundry", "errands"]
-    );
-    solidsArray.push(userSolids[0]);
-    solidsArray.push(userSolids[1]);
-    users.updateUser(
-      user._id,
-      user.name,
-      user.username,
-      user.password,
-      user.email,
-      userSolids
-    );
-  }
+  await populateSolids();
+  await populateComments();
 
+  return;
+}
+
+async function populateSolids() {
+    const usersArray = await userData.getAllUsers();
+    console.log(usersArray);
+  
+    // Generate Solids
+    for (user of usersArray) {
+      let userSolids = [];
+      userSolids[0] = await solidData.addSolid(
+        "07030",
+        `${user.username}'s Solid 1`,
+        user._id,
+        false,
+        false,
+        [],
+        "None",
+        300,
+        new Date(),
+        ["Small Task", "Household"]
+      );
+      userSolids[1] = await solidData.addSolid(
+        "07030",
+        `${user.username}'s Solid 2`,
+        user._id,
+        false,
+        false,
+        [],
+        "None",
+        300,
+        new Date(),
+        ["Quick", "Household"]
+      );
+      users.updateUser(
+        user._id,
+        user.name,
+        user.username,
+        user.password,
+        user.email,
+        userSolids
+      );
+    }
+
+    return;
+}
+
+async function populateComments() {
   // Generate Comments
-  let commentsArray = [];
+  const solidsArray = await solidData.getAllSolids();
   for (solid of solidsArray) {
-    comment = await comments.addComment(
+    comment = await commentData.addComment(
       solid.postedBy,
       "This is a comment by the solid owner",
       solid._id,
       new Date()
     );
-    solids.updateSolid(
+    solidData.updateSolid(
       solid._id,
       solid.location,
       solid.description,
@@ -220,6 +213,19 @@ async function main() {
       solid.tags
     );
   }
+  
+  return;
 }
 
-main();
+const main = async () => {
+  const db = await dbConnection();
+  await db.dropDatabase();
+
+  await populateUsers();
+
+  console.log("Database successfully seeded!");
+//   await db.serverConfig.close();
+  return;
+}
+
+main().catch(console.log);
