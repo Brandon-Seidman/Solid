@@ -10,10 +10,10 @@ router.get("/", (req, res) => {
 router.post("/", async (req, res) => {
   try {
     const { username, password } = req.body;
+
     const db = await dbConnection();
 
     const users = await userData.getAllUsers();
-
     let hashedPassword = "";
     let user;
     for (let i = 0; i < users.length; i++) {
@@ -33,7 +33,9 @@ router.post("/", async (req, res) => {
         throw ":( wrong password";
       }
       if (response) {
+        res.cookie("AuthCookie", username);
         res.redirect("/mainview");
+
         return;
       } else {
         return res

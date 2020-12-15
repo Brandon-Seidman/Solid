@@ -8,14 +8,13 @@ app.use(cookieParser());
 const exphbs = require("express-handlebars");
 
 const static = express.static(path.join(__dirname + "/public"));
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
+app.set("views", path.join(__dirname, "views"));
 
 app.use("/public", static);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
-app.set("view engine", "handlebars");
-app.set("views", path.join(__dirname, "views"));
 
 configRoutes(app);
 app.use(

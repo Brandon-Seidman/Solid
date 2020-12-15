@@ -52,7 +52,7 @@
           };
           formCheck(newUser);
           //make call to server
-          await fetch("/signup", {
+          let response = await fetch("/signup", {
             method: "POST",
             headers: {
               Accept: "application/json, text/plain, */*",
@@ -60,6 +60,9 @@
             },
             body: JSON.stringify(newUser),
           });
+          if (response === 200) {
+            window.location = "/mainview";
+          }
           return;
         } catch (e) {
           const messages = document.getElementById("messages");

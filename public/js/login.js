@@ -24,17 +24,20 @@
           const password = document.getElementById("password").value;
           formCheck(username, password);
           //make call to server
+          const user = { username: username, password: password };
           let response = await fetch("/login", {
             method: "POST",
             headers: {
               Accept: "application/json, text/plain, */*",
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({ username: username, password: password }),
+            body: JSON.stringify(user),
           });
           console.log(response);
           if (response.status !== 200) {
             throw "Incorrect username or password";
+          } else {
+            window.location = "/mainview";
           }
         } catch (e) {
           const messages = document.getElementById("messages");
