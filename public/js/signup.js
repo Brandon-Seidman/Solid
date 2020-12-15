@@ -1,11 +1,20 @@
 (function () {
   function formCheck(newUser) {
-    if (!newUser.email || !newUser.username || !newUser.password)
+    if (
+      !newUser.email ||
+      !newUser.username ||
+      !newUser.password ||
+      !newUser.first_name ||
+      !newUser.last_name
+    )
       throw "Missing fields";
     if (
       newUser.email.trim().length === 0 ||
       !newUser.username.trim().length === 0 ||
-      !newUser.password.trim().length === 0
+      !newUser.password.trim().length === 0 ||
+      !newUser.passwordCheck.trim().length === 0 ||
+      !newUser.first_name.trim().length === 0 ||
+      !newUser.last_name.trim().length === 0
     )
       throw "All fields are required";
     // ******** current issue ****** all fields are required logs but does not add the element to messages
@@ -29,11 +38,13 @@
   if (form) {
     form.addEventListener(
       "submit",
-      (event) => {
+      async (event) => {
         try {
           event.preventDefault();
 
           const newUser = {
+            first_name: document.getElementById("first_name").value,
+            last_name: document.getElementById("last_name").value,
             username: document.getElementById("username").value.toLowerCase(),
             password: document.getElementById("password").value,
             email: document.getElementById("email").value,
@@ -41,9 +52,18 @@
           };
           formCheck(newUser);
           //make call to server
-          let request = new XMLHttpRequest();
-          request.open("POST", "/signup");
-          request.send(form);
+          let response = await fetch("/signup", {
+            method: "POST",
+            headers: {
+              Accept: "application/json, text/plain, */*",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(newUser),
+          });
+          if (response === 200) {
+            window.location = "/mainview";
+          }
+          return;
         } catch (e) {
           const messages = document.getElementById("messages");
           const error = document.getElementById("error");

@@ -1,6 +1,6 @@
-const mongoCollections = require('../config/mongoCollections');
+const mongoCollections = require("../config/mongoCollections");
 const users = mongoCollections.users;
-const uuid = require('uuid');
+const uuid = require("uuid");
 
 let exportedMethods = {
   async getAllUsers() {
@@ -13,10 +13,10 @@ let exportedMethods = {
   async getUserById(id) {
     const userCollection = await users();
     const user = await userCollection.findOne({ _id: id });
-    if (!user) throw 'User not found';
+    if (!user) throw "User not found";
     return user;
   },
-  
+
   async addUser(name,username,password,email,solidsCreated,solidsCompleted,isBuddy) {
     const userCollection = await users();
 
@@ -43,10 +43,10 @@ let exportedMethods = {
     };
 
     const newInsertInformation = await userCollection.insertOne(newUser);
-    if (newInsertInformation.insertedCount === 0) throw 'Insert failed!';
+    if (newInsertInformation.insertedCount === 0) throw "Insert failed!";
     return await this.getUserById(newInsertInformation.insertedId);
   },
-  
+
   async removeUser(id) {
     const userCollection = await users();
     const deletionInfo = await userCollection.deleteOne({ _id: id });
@@ -55,8 +55,8 @@ let exportedMethods = {
     }
     return true;
   },
-  
-  async updateUser(id, name,username,password,email,solidsCreated) {
+
+  async updateUser(id, name, username, password, email, solidsCreated) {
     const user = await this.getUserById(id);
     console.log(user);
 	if(name)
@@ -90,10 +90,10 @@ let exportedMethods = {
       { $set: userUpdateInfo }
     );
     if (!updateInfo.matchedCount && !updateInfo.modifiedCount)
-      throw 'Update failed';
+      throw "Update failed";
 
     return await this.getUserById(id);
-  }
+  },
 };
 
 module.exports = exportedMethods;
