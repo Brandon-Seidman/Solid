@@ -1,6 +1,6 @@
-const mongoCollections = require('../config/mongoCollections');
+const mongoCollections = require("../config/mongoCollections");
 const solids = mongoCollections.solids;
-const uuid = require('uuid');
+const uuid = require("uuid");
 
 let exportedMethods = {
   async getAllSolids() {
@@ -13,13 +13,25 @@ let exportedMethods = {
   async getSolidById(id) {
     const solidCollection = await solids();
     const solid = await solidCollection.findOne({ _id: id });
-    if (!solid) throw 'solid not found';
+    if (!solid) throw "solid not found";
     return solid;
   },
-  
-  async addSolid(location,description,postedBy,accepted,completed,comments,buddyID,price,timestamp,tags) {
+
+  async addSolid(
+    location,
+    description,
+    postedBy,
+    accepted,
+    completed,
+    comments,
+    buddyID,
+    price,
+    timestamp,
+    tags
+  ) {
     const solidCollection = await solids();
 
+<<<<<<< HEAD
 	if(!location || !description || !postedBy || accepted==null|| completed==null|| !comments|| !buddyID|| !price|| !timestamp|| !tags)
 		throw "Please provide all data when creating a solid";
 
@@ -34,25 +46,50 @@ let exportedMethods = {
 	if (typeof timestamp !== 'object') throw "timestamp must be a date";
 	if (!Array.isArray(tags)) throw "tags must be a array";
 	
+=======
+    if (
+      !location ||
+      !description ||
+      !postedBy ||
+      accepted == null ||
+      completed == null ||
+      !comments ||
+      !buddyID ||
+      !price ||
+      !timestamp ||
+      !tags
+    )
+      throw "Please provide all data when creating a solid";
+
+    if (typeof location !== "string") throw "location must be a string";
+    if (typeof description !== "string") throw "description must be a string";
+    if (typeof postedBy !== "string") throw "postedBy must be a string";
+    if (typeof accepted !== "boolean") throw "accepted must be a boolean";
+    if (typeof completed !== "boolean") throw "completed must be a boolean";
+    if (!Array.isArray(comments)) throw "comments must be a array";
+    if (typeof buddyID !== "string") throw "buddyID must be a string";
+    if (typeof price !== "number") throw "price must be a number";
+
+>>>>>>> Routes for post started
     let newSolid = {
       location: location,
       description: description,
-	  postedBy: postedBy,
-	  accepted: accepted,
-	  completed: completed,
-	  comments: comments,
-	  buddyID: buddyID,
-	  price: price,
-	  timestamp: timestamp,
-	  tags: tags,
-	  _id: uuid.v4()
+      postedBy: postedBy,
+      accepted: accepted,
+      completed: completed,
+      comments: comments,
+      buddyID: buddyID,
+      price: price,
+      timestamp: timestamp,
+      tags: tags,
+      _id: uuid.v4(),
     };
 
     const newInsertInformation = await solidCollection.insertOne(newSolid);
-    if (newInsertInformation.insertedCount === 0) throw 'Insert failed!';
+    if (newInsertInformation.insertedCount === 0) throw "Insert failed!";
     return await this.getSolidById(newInsertInformation.insertedId);
   },
-  
+
   async removeSolid(id) {
     const solidCollection = await solids();
     const deletionInfo = await solidCollection.deleteOne({ _id: id });
@@ -61,10 +98,23 @@ let exportedMethods = {
     }
     return true;
   },
-  
-  async updateSolid(id, location,description,postedBy,accepted,completed,comments,buddyID,price,timestamp,tags) {
+
+  async updateSolid(
+    id,
+    location,
+    description,
+    postedBy,
+    accepted,
+    completed,
+    comments,
+    buddyID,
+    price,
+    timestamp,
+    tags
+  ) {
     const solid = await this.getSolidById(id);
     console.log(solid);
+<<<<<<< HEAD
 	if(location)
 		if (typeof location !== 'string') throw "location must be a string";
 	if(description)
@@ -86,17 +136,35 @@ let exportedMethods = {
 	if(tags)
 		if (!Array.isArray(tags)) throw "comments must be a array";
 		
+=======
+    if (location)
+      if (typeof location !== "string") throw "location must be a string";
+    if (description)
+      if (typeof description !== "string") throw "description must be a string";
+    if (postedBy)
+      if (typeof postedBy !== "string") throw "postedBy must be a string";
+    if (accepted)
+      if (typeof accepted !== "boolean") throw "accepted must be a boolean";
+    if (completed)
+      if (typeof completed !== "boolean") throw "completed must be a boolean";
+    if (comments)
+      if (!Array.isArray(comments)) throw "comments must be a array";
+    if (buddyID)
+      if (typeof buddyID !== "string") throw "buddyID must be a string";
+    if (price) if (typeof price !== "number") throw "price must be a number";
+
+>>>>>>> Routes for post started
     const solidUpdateInfo = {
-       location: location,
+      location: location,
       description: description,
-	  postedBy: postedBy,
-	  accepted: accepted,
-	  completed: completed,
-	  comments: comments,
-	  buddyID: buddyID,
-	  price: price,
-	  timestamp: timestamp,
-	  tags: tags
+      postedBy: postedBy,
+      accepted: accepted,
+      completed: completed,
+      comments: comments,
+      buddyID: buddyID,
+      price: price,
+      timestamp: timestamp,
+      tags: tags,
     };
 
     const solidCollection = await solids();
@@ -105,10 +173,10 @@ let exportedMethods = {
       { $set: solidUpdateInfo }
     );
     if (!updateInfo.matchedCount && !updateInfo.modifiedCount)
-      throw 'Update failed';
+      throw "Update failed";
 
     return await this.getSolidById(id);
-  }
+  },
 };
 
 module.exports = exportedMethods;

@@ -14,6 +14,7 @@ router.use(authentication);
 router.get("/", async (req, res) => {
   return res.render("solids/mainview.handlebars", {
     title: "Home",
+    user: req.cookies.AuthCookie,
   });
 });
 
