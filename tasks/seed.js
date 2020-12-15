@@ -14,6 +14,10 @@ async function main() {
   const db = await dbConnection();
   await db.dropDatabase();
   //**** Encrypts given password and adds new user to the database */
+  
+  // Generate Users
+  let usersArray = [];
+
   async function create(
     name,
     username,
@@ -36,6 +40,7 @@ async function main() {
           email,
           solids_made
         );
+        usersArray.push(newUser);
         return newUser;
       });
     });
@@ -142,33 +147,6 @@ async function main() {
     userData
   );
   console.log("Database successfully seeded!");
-  // Generate Buddies
-  let buddiesArray = [];
-  for (let i = 0; i < 10; ++i) {
-    bcrypt.hash("12345", saltRounds, async function (err, hash) {
-      buddiesArray[i] = await buddies.addBuddy(
-        `Firstname Lastname`,
-        `Buddy${i}`,
-        hash,
-        `Buddy${i}@solid.com`,
-        0
-      );
-    });
-  }
-
-  // Generate Users
-  let usersArray = [];
-  for (let i = 0; i < 10; ++i) {
-    bcrypt.hash("12345", saltRounds, async function (err, hash) {
-      usersArray[i] = await users.addUser(
-        `Firstname Lastname`,
-        `User${i}`,
-        hash,
-        `User${i}@solid.com`,
-        0
-      );
-    });
-  }
 
   // Generate Solids
   let solidsArray = [];
@@ -181,7 +159,7 @@ async function main() {
       false,
       false,
       [],
-      null,
+      "None",
       300,
       new Date(),
       ["laundry", "errands"]
@@ -193,7 +171,7 @@ async function main() {
       false,
       false,
       [],
-      null,
+      "None",
       300,
       new Date(),
       ["laundry", "errands"]
@@ -213,7 +191,7 @@ async function main() {
   // Generate Comments
   let commentsArray = [];
   for (solid of solidsArray) {
-    newSolid = await comments.addComment(
+    comment = await comments.addComment(
       solid.postedBy,
       "This is a comment by the solid owner",
       solid._id,
@@ -226,7 +204,7 @@ async function main() {
       solid.postedBy,
       solid.accepted,
       solid.completed,
-      [newSolid._id],
+      [comment._id],
       solid.buddyID,
       solid.price,
       solid.timestamp,
