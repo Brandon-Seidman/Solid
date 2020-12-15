@@ -10,6 +10,7 @@ const searchst = require("./searchst");
 const searchlo = require("./searchlo");
 const userData = require("../data/users");
 const dbConnection = require("../config/mongoConnection");
+//const post = require("./post");
 
 const constructorMethod = (app) => {
   app.use("/login", login);
