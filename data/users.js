@@ -87,9 +87,9 @@ let exportedMethods = {
 		if (typeof email !== 'string') throw "email must be a string";
 	if(solidsCreated!==null)
 		if (!Array.isArray(solidsCreated)) throw "solidsCreated must be a Array";
-	if(solidsCompleted)
+	if(solidsCompleted == null)
 		if (!Number.isInteger(solidsCompleted)) throw "solidsCompleted must be a number";
-	if(isBuddy)
+	if(isBuddy == null)
 		if (typeof isBuddy !== 'boolean') throw "isBuddy must be a boolean";
 
     const userUpdateInfo = {
