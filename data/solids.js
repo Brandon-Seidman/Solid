@@ -20,7 +20,7 @@ let exportedMethods = {
   async addSolid(location,description,postedBy,accepted,completed,comments,buddyID,price,timestamp,tags) {
     const solidCollection = await solids();
 
-	if(!location || !description || !postedBy || !accepted|| !completed|| !comments|| !buddyID|| !price|| !timestamp|| !tags)
+	if(!location || !description || !postedBy || accepted==null|| completed==null|| !comments|| !buddyID|| !price|| !timestamp|| !tags)
 		throw "Please provide all data when creating a solid";
 
 	if (typeof location !== 'string') throw "location must be a string";
@@ -31,7 +31,8 @@ let exportedMethods = {
 	if (!Array.isArray(comments)) throw "comments must be a array";
 	if (typeof buddyID !== 'string') throw "buddyID must be a string";
 	if (typeof price !== 'number') throw "price must be a number";
-	
+	if (typeof timestamp !== 'object') throw "timestamp must be a date";
+	if (!Array.isArray(tags)) throw "tags must be a array";
 	
     let newSolid = {
       location: location,
@@ -70,9 +71,9 @@ let exportedMethods = {
 		if (typeof description !== 'string') throw "description must be a string";
 	if(postedBy)
 		if (typeof postedBy !== 'string') throw "postedBy must be a string";
-	if(accepted)
+	if(accepted!==null)
 		if (typeof accepted !== 'boolean') throw "accepted must be a boolean";
-	if(completed)
+	if(completed!==null)
 		if (typeof completed !== 'boolean') throw "completed must be a boolean";
 	if(comments)
 		if (!Array.isArray(comments)) throw "comments must be a array";
@@ -80,7 +81,11 @@ let exportedMethods = {
 		if (typeof buddyID !== 'string') throw "buddyID must be a string";
 	if(price)
 		if (typeof price !== 'number') throw "price must be a number";
-	
+	if(timestamp)
+		if (typeof timestamp !== 'object') throw "timestamp must be a date";
+	if(tags)
+		if (!Array.isArray(tags)) throw "comments must be a array";
+		
     const solidUpdateInfo = {
        location: location,
       description: description,
