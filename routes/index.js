@@ -3,23 +3,10 @@ const logout = require("./logout");
 const signup = require("./signup");
 const private = require("./private");
 const mainview = require("./mainview");
+//const solids = require("./solids");
 const search = require("./search");
-const solids = require("./solids");
-
-let logging = function (req, res, next) {
-  let date = new Date().toUTCString();
-  let method = req.method;
-  let route = req.originalUrl;
-  let username = req.cookies.AuthCookie;
-  let auth;
-  if (!username) {
-    auth = "(Non-Authenticated User)";
-  } else {
-    auth = "(Authenticated User)";
-  }
-  console.log(`${date} ${method} ${route} ${auth}`);
-  next();
-};
+const userData = require("../data/users");
+const dbConnection = require("../config/mongoConnection");
 
 const constructorMethod = (app) => {
   app.use("/login", login);
@@ -35,26 +22,25 @@ const constructorMethod = (app) => {
   app.use(logging);
   app.get("/", (req, res) => {
     if (!req.cookies.AuthCookie) {
-      res.render("login/login.handlebars", { title: "Login" });
+      return res.redirect("/login");
     } else {
       let username = req.cookies.AuthCookie;
-
+      await dbConnection();
+      let users = userData.getAllUsers();
       let user;
       for (let i = 0; i < users.length; i++) {
         if (users[i].username === username) {
           user = users[i];
         }
       }
-      res.render("login/private.handlebars", {
-        title: "Private",
-        error: false,
-        user: user,
-      });
+
+      return res.redirect("/mainview");
     }
   });
   app.use("*", (req, res) => {
     res.sendStatus(404);
   });
+  return;
 };
 
 module.exports = constructorMethod;

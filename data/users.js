@@ -1,6 +1,6 @@
-const mongoCollections = require('../config/mongoCollections');
+const mongoCollections = require("../config/mongoCollections");
 const users = mongoCollections.users;
-const uuid = require('uuid');
+const uuid = require("uuid");
 
 let exportedMethods = {
   async getAllUsers() {
@@ -13,14 +13,14 @@ let exportedMethods = {
   async getUserById(id) {
     const userCollection = await users();
     const user = await userCollection.findOne({ _id: id });
-    if (!user) throw 'User not found';
+    if (!user) throw "User not found";
     return user;
   },
-  
-  async addUser(name,username,password,email,solidsCreated) {
+
+  async addUser(name,username,password,email,solidsCreated,solidsCompleted,isBuddy) {
     const userCollection = await users();
 
-	if(!name || !username || !password || !email|| !solidsCreated)
+	if(!name || !username || !password || !email|| !solidsCreated|| !solidsCompleted|| !isBuddy)
 		throw "Please provide all data when creating a user";
 
 	if (typeof name !== 'string') throw "name must be a string";
@@ -28,7 +28,8 @@ let exportedMethods = {
 	if (typeof password !== 'string') throw "password must be a string";
 	if (typeof email !== 'string') throw "email must be a string";
 	if (!Array.isArray(solidsCreated)) throw "solidsCreated must be a Array";
-	
+	if (!Number.isInteger(solidsCompleted)) throw "solidsCompleted must be a number";
+	if (typeof isBuddy !== 'boolean') throw "isBuddy must be a boolean";
 
     let newUser = {
       name: name,
@@ -36,14 +37,16 @@ let exportedMethods = {
 	  password: password,
 	  email:email,
 	  solidsCreated: solidsCreated,
+	  solidsCompleted:solidsCompleted,
+	  isBuddy:isBuddy,
       _id: uuid.v4()
     };
 
     const newInsertInformation = await userCollection.insertOne(newUser);
-    if (newInsertInformation.insertedCount === 0) throw 'Insert failed!';
+    if (newInsertInformation.insertedCount === 0) throw "Insert failed!";
     return await this.getUserById(newInsertInformation.insertedId);
   },
-  
+
   async removeUser(id) {
     const userCollection = await users();
     const deletionInfo = await userCollection.deleteOne({ _id: id });
@@ -52,8 +55,8 @@ let exportedMethods = {
     }
     return true;
   },
-  
-  async updateUser(id, name,username,password,email,solidsCreated) {
+
+  async updateUser(id, name, username, password, email, solidsCreated) {
     const user = await this.getUserById(id);
     console.log(user);
 	if(name)
@@ -66,13 +69,19 @@ let exportedMethods = {
 		if (typeof email !== 'string') throw "email must be a string";
 	if(solidsCreated)
 		if (!Array.isArray(solidsCreated)) throw "solidsCreated must be a Array";
+	if(solidsCompleted)
+		if (!Number.isInteger(solidsCompleted)) throw "solidsCompleted must be a number";
+	if(isBuddy)
+		if (typeof isBuddy !== 'boolean') throw "isBuddy must be a boolean";
 
     const userUpdateInfo = {
       name: name,
       username: username,
 	  password: password,
 	  email: email,
-	  solidsCreated: solidsCreated
+	  solidsCreated: solidsCreated,
+	  solidsCompleted:solidsCompleted,
+	  isBuddy:isBuddy
     };
 
     const userCollection = await users();
@@ -81,10 +90,10 @@ let exportedMethods = {
       { $set: userUpdateInfo }
     );
     if (!updateInfo.matchedCount && !updateInfo.modifiedCount)
-      throw 'Update failed';
+      throw "Update failed";
 
     return await this.getUserById(id);
-  }
+  },
 };
 
 module.exports = exportedMethods;

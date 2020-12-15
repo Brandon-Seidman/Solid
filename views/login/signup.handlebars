@@ -1,6 +1,12 @@
 <h1>Sign Up Today!</h1>
 <div>
     <form id="signup-form" method="POST">
+        <label for="first_name">
+            <input type="text" id="first_name" name="first_name" placeholder="First Name" />
+        </label>
+        <label for="last_name">
+            <input type="text" id="last_name" name="last_name" placeholder="Last Name" />
+        </label>
         <label for="email">
             <input type="text" id="email" name="email" placeholder="Email" />
         </label>
@@ -17,22 +23,17 @@
             Submit
         </button>
 
-        {{#if error}}
-        <h2>Invalid Username or Password </h2>
-        {{/if}}
-        {{#if passNoMatch}}
-        <h2> Passwords do not match </h2>
-        {{/if}}
-        {{#if takenUser}}
-        <h2>Woops! Username already taken</h2>
-        {{/if}}
-        {{#if takenEmail}}
-        <h2>Woops! Email already taken</h2>
-        {{/if}}
+
 
     </form>
 </div>
-<div id="messages"></div>
+
+<div id="messages">
+    {{#if Error}}
+    <h2>{{ErrorMessage}}</h2>
+    {{/if}}
+
+</div>
 <div>
     <a href="/">Aleady have an account? Log in here!</a>
 </div>
