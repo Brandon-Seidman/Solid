@@ -28,6 +28,9 @@ const constructorMethod = (app) => {
   app.use("/private", private);
   app.use("/mainview", mainview);
   app.use("/search", search);
+  app.use("/searchkw", search);
+  app.use("/searchst", search);
+  app.use("/searchlo", search);
   app.use("/solids", solids);
   app.use(logging);
   app.get("/", (req, res) => {
