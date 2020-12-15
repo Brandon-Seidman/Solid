@@ -22,7 +22,7 @@ async function main() {
     solids_made,
     userData
   ) {
-    const saltRounds = 10;
+    let saltRounds = 10;
     await bcrypt.genSalt(saltRounds, async function (err, salt) {
       if (err) {
         console.log(err);

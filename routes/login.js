@@ -17,7 +17,8 @@ router.post("/", async (req, res) => {
     let hashedPassword = "";
     let user;
     for (let i = 0; i < users.length; i++) {
-      if (users[i].username === username) hashedPassword = users[i].password;
+      if (users[i].username.toLowerCase() === username)
+        hashedPassword = users[i].password;
       user = users[i];
     }
     if (hashedPassword === "") {
