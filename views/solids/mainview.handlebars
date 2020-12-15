@@ -13,7 +13,50 @@
 </ul>
 
 <h1 class="title">NEW SOLIDS<h1>
+    {{!-- button to trigger modal for solid form --}}
+    <div id="solid_button">
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#solidPostModal">
+        Post a Solid!
+      </button>
 
+    </div>
+    {{!-- modal for post a solid form --}}
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" class="form-control" id="title" aria-describedby="title">
+              </div>
+              <div class="mb-3">
+                <label for="body" class="form-label">What do you need?</label>
+                <input type="body" class="form-control" id="body">
+              </div>
+              <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">Check me out</label>
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Post!</button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+    </div>
     <a class="solidcardlink" href="">
       <div class="solidcard">
         <div>POSTER</div>
