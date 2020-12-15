@@ -20,7 +20,7 @@ let exportedMethods = {
   async addUser(name,username,password,email,solidsCreated,solidsCompleted,isBuddy) {
     const userCollection = await users();
 
-	if(!name || !username || !password || !email|| !solidsCreated|| !solidsCompleted|| !isBuddy)
+	if(!name || !username || !password || !email|| !solidsCreated|| solidsCompleted==null|| !isBuddy)
 		throw "Please provide all data when creating a user";
 
 	if (typeof name !== 'string') throw "name must be a string";
