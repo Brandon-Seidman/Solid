@@ -38,7 +38,9 @@ router.post("/", async (req, res) => {
           username,
           hash,
           email,
-          []
+          [],
+          0,
+          false
         );
         userList = await users.getAllUsers();
 
