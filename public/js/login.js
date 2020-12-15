@@ -6,8 +6,7 @@
   function formCheck(username, password) {
     if (!username || !username.trim() || !password)
       throw "Invalid username or password";
-    // check if username is in the database
-    // check if hashed password input matches hashed password stored
+
     return "ok";
   }
 
@@ -22,6 +21,7 @@
             .getElementById("username")
             .value.toLowerCase();
           const password = document.getElementById("password").value;
+          console.log(password);
           formCheck(username, password);
           //make call to server
           const user = { username: username, password: password };
