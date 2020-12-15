@@ -17,10 +17,10 @@ let exportedMethods = {
     return user;
   },
   
-  async addUser(name,username,password,email,solidsCreated) {
+  async addUser(name,username,password,email,solidsCreated,solidsCompleted,isBuddy) {
     const userCollection = await users();
 
-	if(!name || !username || !password || !email|| !solidsCreated)
+	if(!name || !username || !password || !email|| !solidsCreated|| !solidsCompleted|| !isBuddy)
 		throw "Please provide all data when creating a user";
 
 	if (typeof name !== 'string') throw "name must be a string";
@@ -28,7 +28,8 @@ let exportedMethods = {
 	if (typeof password !== 'string') throw "password must be a string";
 	if (typeof email !== 'string') throw "email must be a string";
 	if (!Array.isArray(solidsCreated)) throw "solidsCreated must be a Array";
-	
+	if (!Number.isInteger(solidsCompleted)) throw "solidsCompleted must be a number";
+	if (typeof isBuddy !== 'boolean') throw "isBuddy must be a boolean";
 
     let newUser = {
       name: name,
@@ -36,6 +37,8 @@ let exportedMethods = {
 	  password: password,
 	  email:email,
 	  solidsCreated: solidsCreated,
+	  solidsCompleted:solidsCompleted,
+	  isBuddy:isBuddy,
       _id: uuid.v4()
     };
 
@@ -66,13 +69,19 @@ let exportedMethods = {
 		if (typeof email !== 'string') throw "email must be a string";
 	if(solidsCreated)
 		if (!Array.isArray(solidsCreated)) throw "solidsCreated must be a Array";
+	if(solidsCompleted)
+		if (!Number.isInteger(solidsCompleted)) throw "solidsCompleted must be a number";
+	if(isBuddy)
+		if (typeof isBuddy !== 'boolean') throw "isBuddy must be a boolean";
 
     const userUpdateInfo = {
       name: name,
       username: username,
 	  password: password,
 	  email: email,
-	  solidsCreated: solidsCreated
+	  solidsCreated: solidsCreated,
+	  solidsCompleted:solidsCompleted,
+	  isBuddy:isBuddy
     };
 
     const userCollection = await users();
