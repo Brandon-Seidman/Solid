@@ -153,3 +153,15 @@ a {
 .fa-globe-americas{
   margin-bottom:30px
 }
+
+.titlesearch{
+  margin-top:85px;
+  margin-bottom: -20px;
+}
+
+.smalllabel{
+  font-weight: normal;
+  padding-right: 10px;
+  color: #505050;
+  font-size: 30px;
+}

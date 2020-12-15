@@ -5,6 +5,9 @@ const private = require("./private");
 const mainview = require("./mainview");
 //const solids = require("./solids");
 const search = require("./search");
+const searchkw = require("./searchkw");
+const searchst = require("./searchst");
+const searchlo = require("./searchlo");
 const userData = require("../data/users");
 const dbConnection = require("../config/mongoConnection");
 
@@ -15,12 +18,12 @@ const constructorMethod = (app) => {
   app.use("/private", private);
   app.use("/mainview", mainview);
   app.use("/search", search);
-  app.use("/searchkw", search);
-  app.use("/searchst", search);
-  app.use("/searchlo", search);
-  app.use("/solids", solids);
-  app.use(logging);
-  app.get("/", (req, res) => {
+  app.use("/searchkw", searchkw);
+  app.use("/searchst", searchst);
+  app.use("/searchlo", searchlo);
+  //app.use("/solids", solids);
+  //app.use(logging);
+  app.get("/", async (req, res) => {
     if (!req.cookies.AuthCookie) {
       return res.redirect("/login");
     } else {
