@@ -5,10 +5,11 @@
 </style>
 
 <ul class="nblist">
-  <li class="nbli"><a class="homenb nb" href="">Home</a></li>
-  <li class="nbli"><a class="nb" href="">Search</a></li>
+  <li class="nbli"><a class="homenb nb" href="/mainview">Home</a></li>
+  <li class="nbli"><a class="nb" href="/search">Search</a></li>
   <li class="nbli"><a class="nb" href="">Post</a></li>
   <li class="nbli"><a class="nb" href="">Account</a></li>
+  <li class="nbli"><a class="nb" href="">Become a Buddy</a></li>
   <li class="nbli"><a class="nb" href="/logout">Logout</a></li>
 </ul>
 
@@ -100,7 +101,7 @@
 
 
 
-    <a class="solidcardlink" href="">
+    <!-- <a class="solidcardlink" href="">
       <div class="solidcard">
         <div>POSTER</div>
         <div>DESCRIPTION</div>
@@ -113,20 +114,19 @@
           <div class="grid-child">TAG3</div>
         </div>
       </div>
-    </a>
+    </a> -->
 
-    <!-- <a class="solidcardlink" href = "">
-  <div class="solidcard">
-    <div>{{solid.postedBy}}</div>
-    <div>{{solid.description}}</div>
-    <div>{{solid.price}}</div>
-    <div>{{solid.location}}</div>
-    <div>{{solid.timestamp}}</div>
-    <div class="grid-container">
-      {{#each show.genres}}
-        <div class="grid-child">{{this}}</div>
-      {{/each}}
+{{#each solid}}
+  <a class="solidcardlink" href = "">
+    <div class="solidcard">
+      <div class="cardelem">{{this.postedBy}}</div>
+      <div class="cardelem">{{this.description}}</div>
+      <div class="cardelem">${{this.price}}</div>
+      <div class="cardelem">{{this.location}}</div>
+      <div class="cardelem">{{this.timestamp}}</div>
+      <div class="cardelembot">{{this.tags}}</div>
     </div>
-  </div>
-</a> -->
-    <script type="text/javascript" src="../../public/js/mainview.js"></script>
+  </a>
+{{/each}}
+
+<script type="text/javascript" src="../../public/js/mainview.js"></script>
