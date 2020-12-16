@@ -1,11 +1,9 @@
-const users = require("../data/users");
-const solids = require("../data/solids");
-const comments = require("../data/comments");
-
 const dbConnection = require("../config/mongoConnection");
 
 const data = require("../data");
 const userData = data.users;
+const solidData = data.solids;
+const commentData = data.comments;
 const bcrypt = require("bcrypt");
 
 async function main() {
@@ -14,16 +12,8 @@ async function main() {
   //**** Encrypts given password and adds new user to the database */
 
   // Generate Users
-  let usersArray = [];
 
-  async function create(
-    name,
-    username,
-    password,
-    email,
-    solids_made,
-    userData
-  ) {
+  async function create(name, username, password, email, zip, solids_made) {
     let saltRounds = 10;
     let hash = await bcrypt.hash(password, saltRounds);
     let newUser = await userData.addUser(
@@ -31,12 +21,11 @@ async function main() {
       username,
       hash,
       email,
+      zip,
       solids_made,
       0,
       false
     );
-    console.log(newUser);
-    usersArray.push(newUser);
     return newUser;
   }
 
@@ -47,8 +36,8 @@ async function main() {
     "shobby", // USERNAME
     "beepbooplettuce", // PASSWORD
     "shannonhobby1@hotmail.com", // EMAIL
-    [], // SOLIDS CREATED
-    userData
+    "07030", // ZIP CODE
+    [] // SOLIDS CREATED
   );
 
   await create(
@@ -56,8 +45,8 @@ async function main() {
     "praesent",
     "ilovemymom",
     "dfalkinder0adrowsfield1@forbes.com",
-    [],
-    userData
+    "60030",
+    []
   );
 
   await create(
@@ -65,8 +54,8 @@ async function main() {
     "in2010",
     "catlover1234",
     "adrowsfield1@forbes.com",
-    [],
-    userData
+    "07030",
+    []
   );
 
   await create(
@@ -74,8 +63,8 @@ async function main() {
     "nasceture",
     "CJrshgLCW",
     "rbeert2@dyndns.org",
-    [],
-    userData
+    "06051", // New Britain, CT
+    []
   );
 
   await create(
@@ -83,8 +72,8 @@ async function main() {
     "seedling12",
     "wU82An87",
     "lgentry3@guardian.co.uk",
-    [],
-    userData
+    "65401", // Rolla, MO
+    []
   );
 
   await create(
@@ -92,16 +81,16 @@ async function main() {
     "brandyboy",
     "youmeanyouarenotedsheeran?",
     "bseidman@stevens.edu",
-    [],
-    userData
+    "07030",
+    []
   );
   await create(
     "Scott Murray",
     "ScottTheSecond",
     "dontforgettheJR",
     "smurray@stevens.edu",
-    [],
-    userData
+    "07030",
+    []
   );
 
   await create(
@@ -109,8 +98,8 @@ async function main() {
     "heartteddybear",
     "ihavesomanyfinals2020",
     "jmeyerberg@stevens.edu",
-    [],
-    userData
+    "07030",
+    []
   );
 
   await create(
@@ -118,8 +107,8 @@ async function main() {
     "inquis",
     "PlH1Z9ffZew",
     "htrevino@simplemachines.org",
-    [],
-    userData
+    "60030",
+    []
   );
 
   await create(
@@ -127,8 +116,8 @@ async function main() {
     "convallis",
     "b1kg9l3O5I5r",
     "pesh1@hubpages.com",
-    [],
-    userData
+    "19464", //pottstown pa
+    []
   );
 
   await create(
@@ -136,20 +125,15 @@ async function main() {
     "dictumst",
     "BrY1fpzbv",
     "nkurth2@answers.com",
-    [],
-    userData
+    "07030",
+    []
   );
-  let users = await userData.getAllUsers();
-  console.log(users);
 
-  console.log("Database successfully seeded!");
-
+  const usersArray = await userData.getAllUsers();
   // Generate Solids
-  let solidsArray = [];
   for (user of usersArray) {
-    let userSolids = [];
-    userSolids[0] = await solids.addSolid(
-      "07030",
+    const solid1 = await solidData.addSolid(
+      `${user.zip}`,
       `${user.username}'s Solid 1`,
       user._id,
       false,
@@ -158,10 +142,10 @@ async function main() {
       "None",
       300,
       new Date(),
-      ["laundry", "errands"]
+      ["Small Task", "Household"]
     );
-    userSolids[1] = await solids.addSolid(
-      "07030",
+    const solid2 = await solidData.addSolid(
+      `${user.zip}`,
       `${user.username}'s Solid 2`,
       user._id,
       false,
@@ -170,30 +154,33 @@ async function main() {
       "None",
       300,
       new Date(),
-      ["laundry", "errands"]
+      ["Quick", "Household"]
     );
-    solidsArray.push(userSolids[0]);
-    solidsArray.push(userSolids[1]);
+    const userSolids = [solid1._id, solid2._id];
     userData.updateUser(
       user._id,
       user.name,
       user.username,
       user.password,
       user.email,
-      userSolids
+      user.zip,
+      userSolids,
+      user.solidsCompleted,
+      user.isBuddy
     );
   }
 
   // Generate Comments
-  let commentsArray = [];
+  const solidsArray = await solidData.getAllSolids();
+
   for (solid of solidsArray) {
-    comment = await comments.addComment(
+    const comment = await commentData.addComment(
       solid.postedBy,
       "This is a comment by the solid owner",
       solid._id,
       new Date()
     );
-    solids.updateSolid(
+    solidData.updateSolid(
       solid._id,
       solid.location,
       solid.description,
@@ -207,6 +194,8 @@ async function main() {
       solid.tags
     );
   }
+
+  console.log("Database successfully seeded!");
 }
 
 main();

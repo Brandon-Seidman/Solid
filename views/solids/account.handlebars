@@ -1,9 +1,9 @@
 <script src="https://kit.fontawesome.com/9764bc42f4.js" crossorigin="anonymous"></script>
 
 <style>
-  body {
-    background-color: #dae0da;
-  }
+body {
+  background-color: #dae0da;
+}
 </style>
 
 <ul class="nblist">
@@ -15,24 +15,20 @@
   <li class="nbli"><a class="nb" href="/logout">Logout</a></li>
 </ul>
 
-<h1 class="searchtitlemain">CHOOSE A SEARCH METHOD</h1>
+<div>
+<h1> title </h1>
+</div> 
 
-<div class="imagedivs">
-  <h2 class="searchtitle">KEYWORD</h2>
 
-  <a href="/searchkw">
-    <i class="fas fa-key fa-9x"></i>
-  </a>
-
-  <h2 class="searchtitle">SOLID TAG</h2>
-
-  <a href="/searchst">
-    <i class="fas fa-tags fa-9x"></i>
-  </a>
-
-  <h2 class="searchtitle">LOCATION</h2>
-
-  <a href="/searchlo">
-    <i class="fas fa-globe-americas fa-9x"></i>
-  </a>
-</div>
+{{#each solid}}
+    <a class="solidcardlink" href="">
+      <div class="solidcard">
+        <div class="cardelem">{{this.postedBy}}</div>
+        <div class="cardelem">{{this.description}}</div>
+        <div class="cardelem">${{this.price}}</div>
+        <div class="cardelem">{{this.location}}</div>
+        <div class="cardelem">{{this.timestamp}}</div>
+        <div class="cardelembot">{{this.tags}}</div>
+      </div>
+    </a>
+{{/each}}

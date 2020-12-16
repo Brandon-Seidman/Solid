@@ -59,6 +59,14 @@ let exportedMethods = {
     return solid;
   },
 
+
+  async getSolidByUser(user) {
+    const solidCollection = await solids();
+    const solid = await solidCollection.find({ postedBy: user}).toArray();
+    if (!solid) throw "solid not found";
+    return solid;
+  },
+
   async addSolid(
     location,
     description,
@@ -138,7 +146,6 @@ let exportedMethods = {
     tags
   ) {
     const solid = await this.getSolidById(id);
-    console.log(solid);
     if (location)
       if (typeof location !== "string") throw "location must be a string";
     if (description)

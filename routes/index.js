@@ -8,6 +8,7 @@ const search = require("./search");
 const searchkw = require("./searchkw");
 const searchst = require("./searchst");
 const searchlo = require("./searchlo");
+const account = require("./account");
 const userData = require("../data/users");
 const dbConnection = require("../config/mongoConnection");
 //const post = require("./post");
@@ -22,6 +23,7 @@ const constructorMethod = (app) => {
   app.use("/searchkw", searchkw);
   app.use("/searchst", searchst);
   app.use("/searchlo", searchlo);
+  app.use("/account", account);
   //app.use("/solids", solids);
   //app.use(logging);
   app.get("/", async (req, res) => {

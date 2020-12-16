@@ -5,7 +5,8 @@
       !newUser.username ||
       !newUser.password ||
       !newUser.first_name ||
-      !newUser.last_name
+      !newUser.last_name ||
+      !newUser.zip
     )
       throw "Missing fields";
     if (
@@ -14,12 +15,12 @@
       !newUser.password.trim().length === 0 ||
       !newUser.passwordCheck.trim().length === 0 ||
       !newUser.first_name.trim().length === 0 ||
-      !newUser.last_name.trim().length === 0
+      !newUser.last_name.trim().length === 0 ||
+      !newUser.zip.trim()
     )
       throw "All fields are required";
-    // ******** current issue ****** all fields are required logs but does not add the element to messages
-    // make sure no spaces - make sure it's long enough
     if (!newUser.email.includes("@")) throw "Invalid Email";
+
     if (newUser.password !== newUser.passwordCheck)
       throw "Passwords do not match";
     // spaces aren't allowed we aint about to have someone named "hi mom"
@@ -48,6 +49,7 @@
             username: document.getElementById("username").value.toLowerCase(),
             password: document.getElementById("password").value,
             email: document.getElementById("email").value,
+            zip: document.getElementById("zip").value,
             passwordCheck: document.getElementById("passwordCheck").value,
           };
           formCheck(newUser);
