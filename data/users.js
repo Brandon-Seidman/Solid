@@ -28,6 +28,7 @@ let exportedMethods = {
     username,
     password,
     email,
+	zip,
     solidsCreated,
     solidsCompleted,
     isBuddy
@@ -39,6 +40,7 @@ let exportedMethods = {
       !username ||
       !password ||
       !email ||
+	  !zip||
       !solidsCreated ||
       solidsCompleted === null ||
       isBuddy === null
@@ -48,6 +50,7 @@ let exportedMethods = {
     if (typeof name !== "string") throw "name must be a string";
     if (typeof username !== "string") throw "username must be a string";
     if (typeof password !== "string") throw "password must be a string";
+	if (typeof zip !== "string") throw "zip must be a string";
     if (typeof email !== "string") throw "email must be a string";
     if (!Array.isArray(solidsCreated)) throw "solidsCreated must be a Array";
     if (!Number.isInteger(solidsCompleted))
@@ -62,6 +65,7 @@ let exportedMethods = {
       solidsCreated: solidsCreated,
       solidsCompleted: solidsCompleted,
       isBuddy: isBuddy,
+	  zip: zip,
       _id: uuid.v4(),
     };
 
@@ -85,6 +89,7 @@ let exportedMethods = {
     username,
     password,
     email,
+	zip,
     solidsCreated,
     solidsCompleted,
     isBuddy
@@ -96,6 +101,7 @@ let exportedMethods = {
       !username ||
       !password ||
       !email ||
+	  !zip||
       !solidsCreated ||
       solidsCompleted === null ||
       isBuddy === null
@@ -115,7 +121,8 @@ let exportedMethods = {
         throw "solidsCompleted must be a number";
     if (isBuddy == null)
       if (typeof isBuddy !== "boolean") throw "isBuddy must be a boolean";
-
+	if(zip)
+		if (typeof zip !== "string") throw "zip must be a string";
     const userUpdateInfo = {
       name: name,
       username: username,
@@ -124,6 +131,7 @@ let exportedMethods = {
       solidsCreated: solidsCreated,
       solidsCompleted: solidsCompleted,
       isBuddy: isBuddy,
+	  zip:zip
     };
 
     const userCollection = await users();
