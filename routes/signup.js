@@ -11,7 +11,7 @@ router.get("/", async (req, res) => {
 });
 router.post("/", async (req, res) => {
   try {
-    const { email, password, username, first_name, last_name } = req.body;
+    const { email, password, username, first_name, last_name, zip } = req.body;
     if (
       !email ||
       !email.trim() ||
@@ -22,9 +22,13 @@ router.post("/", async (req, res) => {
       !first_name ||
       !first_name.trim() ||
       !last_name ||
-      !last_name.trim()
+      !last_name.trim() ||
+      !zip ||
+      !zip.trim()
     )
       throw "Error: Attribute not received ";
+
+    let userList = await users.getAllUsers();
     for (let i = 0; i < userList.length; i++) {
       if (userList[i].email === email) {
         throw "Oh no! Looks like that email is already taken :(";
@@ -46,11 +50,11 @@ router.post("/", async (req, res) => {
           username,
           hash,
           email,
+          zip,
           [],
           0,
           false
         );
-        userList = await users.getAllUsers();
 
         res.cookie("AuthCookie", username);
         res.redirect("/mainview");

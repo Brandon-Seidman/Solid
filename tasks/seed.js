@@ -13,14 +13,7 @@ async function main() {
 
   // Generate Users
 
-  async function create(
-    name,
-    username,
-    password,
-    email,
-    solids_made,
-    userData
-  ) {
+  async function create(name, username, password, email, zip, solids_made) {
     let saltRounds = 10;
     let hash = await bcrypt.hash(password, saltRounds);
     let newUser = await userData.addUser(
@@ -28,6 +21,7 @@ async function main() {
       username,
       hash,
       email,
+      zip,
       solids_made,
       0,
       false
@@ -42,8 +36,8 @@ async function main() {
     "shobby", // USERNAME
     "beepbooplettuce", // PASSWORD
     "shannonhobby1@hotmail.com", // EMAIL
-    [], // SOLIDS CREATED
-    userData
+    "07030", // ZIP CODE
+    [] // SOLIDS CREATED
   );
 
   await create(
@@ -51,8 +45,8 @@ async function main() {
     "praesent",
     "ilovemymom",
     "dfalkinder0adrowsfield1@forbes.com",
-    [],
-    userData
+    "60030",
+    []
   );
 
   await create(
@@ -60,8 +54,8 @@ async function main() {
     "in2010",
     "catlover1234",
     "adrowsfield1@forbes.com",
-    [],
-    userData
+    "07030",
+    []
   );
 
   await create(
@@ -69,8 +63,8 @@ async function main() {
     "nasceture",
     "CJrshgLCW",
     "rbeert2@dyndns.org",
-    [],
-    userData
+    "06051", // New Britain, CT
+    []
   );
 
   await create(
@@ -78,8 +72,8 @@ async function main() {
     "seedling12",
     "wU82An87",
     "lgentry3@guardian.co.uk",
-    [],
-    userData
+    "65401", // Rolla, MO
+    []
   );
 
   await create(
@@ -87,16 +81,16 @@ async function main() {
     "brandyboy",
     "youmeanyouarenotedsheeran?",
     "bseidman@stevens.edu",
-    [],
-    userData
+    "07030",
+    []
   );
   await create(
     "Scott Murray",
     "ScottTheSecond",
     "dontforgettheJR",
     "smurray@stevens.edu",
-    [],
-    userData
+    "07030",
+    []
   );
 
   await create(
@@ -104,8 +98,8 @@ async function main() {
     "heartteddybear",
     "ihavesomanyfinals2020",
     "jmeyerberg@stevens.edu",
-    [],
-    userData
+    "07030",
+    []
   );
 
   await create(
@@ -113,8 +107,8 @@ async function main() {
     "inquis",
     "PlH1Z9ffZew",
     "htrevino@simplemachines.org",
-    [],
-    userData
+    "60030",
+    []
   );
 
   await create(
@@ -122,8 +116,8 @@ async function main() {
     "convallis",
     "b1kg9l3O5I5r",
     "pesh1@hubpages.com",
-    [],
-    userData
+    "19464", //pottstown pa
+    []
   );
 
   await create(
@@ -131,15 +125,15 @@ async function main() {
     "dictumst",
     "BrY1fpzbv",
     "nkurth2@answers.com",
-    [],
-    userData
+    "07030",
+    []
   );
 
   const usersArray = await userData.getAllUsers();
   // Generate Solids
   for (user of usersArray) {
     const solid1 = await solidData.addSolid(
-      "07030",
+      `${user.zip}`,
       `${user.username}'s Solid 1`,
       user._id,
       false,
@@ -151,7 +145,7 @@ async function main() {
       ["Small Task", "Household"]
     );
     const solid2 = await solidData.addSolid(
-      "07030",
+      `${user.zip}`,
       `${user.username}'s Solid 2`,
       user._id,
       false,
@@ -169,6 +163,7 @@ async function main() {
       user.username,
       user.password,
       user.email,
+      user.zip,
       userSolids,
       user.solidsCompleted,
       user.isBuddy

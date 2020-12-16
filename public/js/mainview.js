@@ -42,7 +42,7 @@
           }
           //make call to server
           const solid = {
-            location: "07030",
+            location: "Not Provided",
             description: body,
             postedBy: user,
             accepted: false,

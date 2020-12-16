@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const data = require("../data");
 const solidData = data.solids;
+const userData = data.users;
 
 let authentication = async function (req, res, next) {
   let username = req.cookies.AuthCookie;
@@ -14,10 +15,10 @@ let authentication = async function (req, res, next) {
 router.use(authentication);
 router.get("/", async (req, res) => {
   const solid = await solidData.getAllSolids();
-  console.log(solid);
   return res.render("solids/mainview.handlebars", {
     title: "Home",
     solid: solid,
+    user: req.cookies.AuthCookie,
   });
 });
 
@@ -55,8 +56,9 @@ router.post("/", async (req, res) => {
   )
     throw "Error: All fields require non-empty strings";
 
+  const userInfo = await userData.getUserByUsername(postedBy);
   let newSolid = await solidData.addSolid(
-    location,
+    userInfo.zip,
     description,
     postedBy,
     accepted,
