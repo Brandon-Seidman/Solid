@@ -19,10 +19,28 @@
           const price = document.getElementById("price").value;
           const date = new Date().toDateString();
           const user = document.getElementById("name").value;
+          const formTags = [
+            document.getElementById("shopping"),
+            document.getElementById("pickup"),
+            document.getElementById("small_task"),
+            document.getElementById("large_task"),
+            document.getElementById("car_needed"),
+            document.getElementById("art"),
+            document.getElementById("computer"),
+            document.getElementById("labor"),
+            document.getElementById("writing"),
+            document.getElementById("household"),
+            document.getElementById("quick"),
+          ];
 
           formCheck(price, body);
+          let tags = [];
+          for (let i = 0; i < formTags.length; i++) {
+            if (formTags[i].checked) {
+              tags.push(formTags[i].id);
+            }
+          }
           //make call to server
-
           const solid = {
             location: "07030",
             description: body,
@@ -33,7 +51,7 @@
             buddyID: "None",
             price: parseInt(price),
             timestamp: date,
-            tags: [],
+            tags: tags,
           };
           let response = await fetch("/mainview", {
             method: "POST",
