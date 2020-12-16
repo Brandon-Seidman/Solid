@@ -24,7 +24,6 @@ let exportedMethods = {
 	if (typeof commentBy !== 'string') throw "commentBy must be a string";
 	if (typeof description !== 'string') throw "description must be a string";
 	if (typeof solid !== 'string') throw "solid must be a string";
-	if (typeof email !== 'email') throw "email must be a string";
 	if (typeof timestamp !== 'object') throw "timestamp must be a date";
 
     let newComment = {
