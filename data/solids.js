@@ -2,6 +2,15 @@ const mongoCollections = require("../config/mongoCollections");
 const solids = mongoCollections.solids;
 const uuid = require("uuid");
 
+function isInList(x, lst){
+  for(let i = 0; i < lst.length; i++){
+    if (x == lst[i]){
+      return true;
+    }
+  }
+  return false;
+}
+
 let exportedMethods = {
   async getAllSolids() {
     const solidCollection = await solids();
@@ -14,6 +23,39 @@ let exportedMethods = {
     const solidCollection = await solids();
     const solid = await solidCollection.findOne({ _id: id });
     if (!solid) throw "solid not found";
+    return solid;
+  },
+
+  async getSolidByLocation(loc) {
+    const solidCollection = await solids();
+    const solid = await solidCollection.find({ location: loc });
+    if (!solid) throw "solid(s) not found";
+    return solid.toArray();
+  },
+
+  async getSolidByKey(key) {
+    var regex = new RegExp(key);
+    //console.log(regex);
+    const solidCollection = await solids();
+    //console.log(typeof(solidCollection));
+    const solid = await solidCollection.find({ description: regex });
+    if (!solid) throw "solid(s) not found";
+    return solid.toArray();
+  },
+
+  async getSolidByTag(tag) {
+    const solidCollection = await solids();
+    let solid = [];
+    const solidsList = await solidCollection.find({}).toArray();
+    // console.log(solidCollection);
+    for (let i = 0; i < solidsList.length; i++){
+      //console.log(solidsList[i].tags);
+      if(isInList(tag,solidsList[i].tags) == true){
+        solid.push(solidsList[i]);
+      }
+    }
+    // const solid = await solidCollection.find({  });
+    // if (!solid) throw "solid(s) not found";
     return solid;
   },
 

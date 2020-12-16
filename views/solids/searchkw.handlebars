@@ -21,3 +21,16 @@ body {
   Keyword: <input type="text" name="searchTerm" id="searchTerm" placeholder="Enter a term" class="submits">
 </label>
 <input type="submit" value="Submit" id="button" class="submits">
+
+{{#each solid}}
+  <a class="solidcardlink" href = "">
+    <div class="solidcard">
+      <div class="cardelem">{{this.postedBy}}</div>
+      <div class="cardelem">{{this.description}}</div>
+      <div class="cardelem">${{this.price}}</div>
+      <div class="cardelem">{{this.location}}</div>
+      <div class="cardelem">{{this.timestamp}}</div>
+      <div class="cardelembot">{{this.tags}}</div>
+    </div>
+  </a>
+{{/each}}
