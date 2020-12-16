@@ -15,13 +15,21 @@ h1 {
   font-weight: bold;
   font-size: 50px;
 }
-div {
+
+div#messages,
+div#main {
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
   flex: 1;
-  margin-left: 10px;
-  margin-right: 10px;
+  padding: 10px;
+  align-items: center;
+}
+div {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  flex: 1;
   align-items: center;
 }
 body {
@@ -71,6 +79,11 @@ a {
 /* POST A SOLID FORM/MODAL */
 #solid_button {
   padding-top: 100px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  flex: 1;
+  align-items: center;
 }
 /* NAVBAR CSS */
 
@@ -149,6 +162,10 @@ a {
 .grid-child {
   display: table-cell;
   padding: 3px;
+}
+.form-check-label {
+  font-size: 50px;
+  display: inline;
 }
 
 /* MAIN SEARCH PAGE */

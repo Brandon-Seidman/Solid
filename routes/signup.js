@@ -12,11 +12,19 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     const { email, password, username, first_name, last_name } = req.body;
-    // CHECK IF EMAIL OR USERNAME IS IN DATABASE
-    const db = await dbConnection();
-
-    userList = await users.getAllUsers();
-
+    if (
+      !email ||
+      !email.trim() ||
+      !password ||
+      !username ||
+      !password.trim() ||
+      !username.trim() ||
+      !first_name ||
+      !first_name.trim() ||
+      !last_name ||
+      !last_name.trim()
+    )
+      throw "Error: Attribute not received ";
     for (let i = 0; i < userList.length; i++) {
       if (userList[i].email === email) {
         throw "Oh no! Looks like that email is already taken :(";
