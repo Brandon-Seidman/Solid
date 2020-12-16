@@ -14,7 +14,7 @@ let authentication = async function (req, res, next) {
 router.use(authentication);
 router.get("/", async (req, res) => {
   const solid = await solids.getAllSolids();
-  console.log(solid);
+  //console.log(solid);
   return res.render("solids/mainview.handlebars", {
     title: "Home", solid: solid
   });

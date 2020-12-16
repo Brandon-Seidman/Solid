@@ -153,6 +153,13 @@ a {
 .solidcard {
   margin-top: 30px;
   border-style: double;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  flex: 1;
+  margin-left: 10px;
+  margin-right: 10px;
+  align-items: center;
 }
 
 .grid-container {
@@ -163,9 +170,14 @@ a {
   display: table-cell;
   padding: 3px;
 }
+
 .form-check-label {
   font-size: 50px;
   display: inline;
+}
+
+.cardelem{
+  margin-bottom: 15px;
 }
 
 /* MAIN SEARCH PAGE */
@@ -188,12 +200,26 @@ a {
 
 .titlesearch{
   margin-top:85px;
-  margin-bottom: -20px;
+  margin-bottom: 0px;
 }
 
 .smalllabel{
   font-weight: normal;
   padding-right: 10px;
   color: #505050;
+  font-size: 30px;
+}
+
+.imagedivs{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  flex: 1;
+  margin-left: 10px;
+  margin-right: 10px;
+  align-items: center;
+}
+
+.submits{
   font-size: 30px;
 }

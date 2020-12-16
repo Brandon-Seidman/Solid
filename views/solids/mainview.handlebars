@@ -101,7 +101,7 @@
 
 
 
-    <a class="solidcardlink" href="">
+    <!-- <a class="solidcardlink" href="">
       <div class="solidcard">
         <div>POSTER</div>
         <div>DESCRIPTION</div>
@@ -114,22 +114,19 @@
           <div class="grid-child">TAG3</div>
         </div>
       </div>
-    </a>
+    </a> -->
 
 {{#each solid}}
   <a class="solidcardlink" href = "">
     <div class="solidcard">
-      <div>{{this.solid.postedBy}}</div>
-      <div>{{this.solid.description}}</div>
-      <div>{{this.solid.price}}</div>
-      <div>{{this.solid.location}}</div>
-      <div>{{this.solid.timestamp}}</div>
-      <div>{{this.solid.tags}}</div>
-      <!-- <div class="grid-container">
-        {{#each solid.tags}}
-          <div class="grid-child">{{this}}</div>
-        {{/each}}
-      </div> -->
+      <div class="cardelem">{{this.postedBy}}</div>
+      <div class="cardelem">{{this.description}}</div>
+      <div class="cardelem">${{this.price}}</div>
+      <div class="cardelem">{{this.location}}</div>
+      <div class="cardelem">{{this.timestamp}}</div>
+      <div class="cardelembot">{{this.tags}}</div>
     </div>
   </a>
 {{/each}}
+
+<script type="text/javascript" src="../../public/js/mainview.js"></script>
