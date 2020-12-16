@@ -16,7 +16,14 @@ let exportedMethods = {
     if (!solid) throw "solid not found";
     return solid;
   },
-
+		
+  async getSolidByUser(user) {
+    const solidCollection = await solids();
+    const solid = await solidCollection.find({ postedBy: user}).toArray();
+    if (!solid) throw "solid not found";
+    return solid;
+  }, 
+  
   async addSolid(
     location,
     description,

@@ -16,6 +16,12 @@ let exportedMethods = {
     if (!user) throw "User not found";
     return user;
   },
+  async getUserByUsername(usern) {
+    const userCollection = await users();
+    const user = await userCollection.findOne({ username: usern });
+    if (!user) throw "User not found";
+    return user;
+  },
 
   async addUser(
     name,
