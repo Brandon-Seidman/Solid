@@ -5,8 +5,8 @@
 </style>
 
 <ul class="nblist">
-  <li class="nbli"><a class="homenb nb" href="">Home</a></li>
-  <li class="nbli"><a class="nb" href="">Search</a></li>
+  <li class="nbli"><a class="homenb nb" href="/mainview">Home</a></li>
+  <li class="nbli"><a class="nb" href="/search">Search</a></li>
   <li class="nbli"><a class="nb" href="">Post</a></li>
   <li class="nbli"><a class="nb" href="">Account</a></li>
   <li class="nbli"><a class="nb" href="">Become a Buddy</a></li>
@@ -76,17 +76,20 @@
       </div>
     </a>
 
-    <!-- <a class="solidcardlink" href = "">
-  <div class="solidcard">
-    <div>{{solid.postedBy}}</div>
-    <div>{{solid.description}}</div>
-    <div>{{solid.price}}</div>
-    <div>{{solid.location}}</div>
-    <div>{{solid.timestamp}}</div>
-    <div class="grid-container">
-      {{#each show.genres}}
-        <div class="grid-child">{{this}}</div>
-      {{/each}}
+{{#each solid}}
+  <a class="solidcardlink" href = "">
+    <div class="solidcard">
+      <div>{{this.solid.postedBy}}</div>
+      <div>{{this.solid.description}}</div>
+      <div>{{this.solid.price}}</div>
+      <div>{{this.solid.location}}</div>
+      <div>{{this.solid.timestamp}}</div>
+      <div>{{this.solid.tags}}</div>
+      <!-- <div class="grid-container">
+        {{#each solid.tags}}
+          <div class="grid-child">{{this}}</div>
+        {{/each}}
+      </div> -->
     </div>
-  </div>
-</a> -->
+  </a>
+{{/each}}
