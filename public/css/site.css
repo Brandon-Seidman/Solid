@@ -176,7 +176,7 @@ a {
   display: inline;
 }
 
-.cardelem{
+.cardelem {
   margin-bottom: 15px;
 }
 
@@ -198,19 +198,19 @@ a {
   margin-bottom: 30px;
 }
 
-.titlesearch{
-  margin-top:85px;
+.titlesearch {
+  margin-top: 85px;
   margin-bottom: 0px;
 }
 
-.smalllabel{
+.smalllabel {
   font-weight: normal;
   padding-right: 10px;
   color: #505050;
   font-size: 30px;
 }
 
-.imagedivs{
+.imagedivs {
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
@@ -220,6 +220,6 @@ a {
   align-items: center;
 }
 
-.submits{
+.submits {
   font-size: 30px;
 }
