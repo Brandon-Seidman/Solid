@@ -34,8 +34,8 @@ let exportedMethods = {
       !password ||
       !email ||
       !solidsCreated ||
-      solidsCompleted == null ||
-      isBuddy == null
+      solidsCompleted === null ||
+      isBuddy === null
     )
       throw "Please provide all data when creating a user";
 
@@ -73,24 +73,43 @@ let exportedMethods = {
     return true;
   },
 
-  async updateUser(id, name, username, password, email, solidsCreated) {
+  async updateUser(
+    id,
+    name,
+    username,
+    password,
+    email,
+    solidsCreated,
+    solidsCompleted,
+    isBuddy
+  ) {
     const user = await this.getUserById(id);
     console.log(user);
 
-	if(name)
-		if (typeof name !== 'string') throw "name must be a string";
-	if(username)
-		if (typeof username !== 'string') throw "username must be a string";
-	if(password)
-		if (typeof password !== 'string') throw "password must be a string";
-	if(email)
-		if (typeof email !== 'string') throw "email must be a string";
-	if(solidsCreated!==null)
-		if (!Array.isArray(solidsCreated)) throw "solidsCreated must be a Array";
-	if(solidsCompleted == null)
-		if (!Number.isInteger(solidsCompleted)) throw "solidsCompleted must be a number";
-	if(isBuddy == null)
-		if (typeof isBuddy !== 'boolean') throw "isBuddy must be a boolean";
+    if (
+      !name ||
+      !username ||
+      !password ||
+      !email ||
+      !solidsCreated ||
+      solidsCompleted === null ||
+      isBuddy === null
+    )
+      throw "Please provide all data when updating a user";
+
+    if (name) if (typeof name !== "string") throw "name must be a string";
+    if (username)
+      if (typeof username !== "string") throw "username must be a string";
+    if (password)
+      if (typeof password !== "string") throw "password must be a string";
+    if (email) if (typeof email !== "string") throw "email must be a string";
+    if (solidsCreated !== null)
+      if (!Array.isArray(solidsCreated)) throw "solidsCreated must be a Array";
+    if (solidsCompleted == null)
+      if (!Number.isInteger(solidsCompleted))
+        throw "solidsCompleted must be a number";
+    if (isBuddy == null)
+      if (typeof isBuddy !== "boolean") throw "isBuddy must be a boolean";
 
     const userUpdateInfo = {
       name: name,
