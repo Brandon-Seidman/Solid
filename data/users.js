@@ -86,8 +86,6 @@ let exportedMethods = {
     const user = await this.getUserById(id);
     console.log(user);
 
-<<<<<<< HEAD
-=======
     if (
       !name ||
       !username ||
@@ -99,7 +97,6 @@ let exportedMethods = {
     )
       throw "Please provide all data when updating a user";
 
->>>>>>> d8313dd114a906743896dc5bd478535436bae0a7
     if (name) if (typeof name !== "string") throw "name must be a string";
     if (username)
       if (typeof username !== "string") throw "username must be a string";
