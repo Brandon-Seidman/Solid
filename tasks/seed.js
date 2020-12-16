@@ -1,11 +1,9 @@
-const users = require("../data/users");
-const solids = require("../data/solids");
-const comments = require("../data/comments");
-
 const dbConnection = require("../config/mongoConnection");
 
 const data = require("../data");
 const userData = data.users;
+const solidData = data.solids;
+const commentData = data.comments;
 const bcrypt = require("bcrypt");
 
 async function main() {
@@ -14,7 +12,6 @@ async function main() {
   //**** Encrypts given password and adds new user to the database */
 
   // Generate Users
-  let usersArray = [];
 
   async function create(
     name,
@@ -35,8 +32,6 @@ async function main() {
       0,
       false
     );
-    console.log(newUser);
-    usersArray.push(newUser);
     return newUser;
   }
 
@@ -139,16 +134,11 @@ async function main() {
     [],
     userData
   );
-  let users = await userData.getAllUsers();
-  console.log(users);
 
-  console.log("Database successfully seeded!");
-
+  const usersArray = await userData.getAllUsers();
   // Generate Solids
-  let solidsArray = [];
   for (user of usersArray) {
-    let userSolids = [];
-    userSolids[0] = await solids.addSolid(
+    const solid1 = await solidData.addSolid(
       "07030",
       `${user.username}'s Solid 1`,
       user._id,
@@ -158,9 +148,9 @@ async function main() {
       "None",
       300,
       new Date(),
-      ["laundry", "errands"]
+      ["Small Task", "Household"]
     );
-    userSolids[1] = await solids.addSolid(
+    const solid2 = await solidData.addSolid(
       "07030",
       `${user.username}'s Solid 2`,
       user._id,
@@ -170,30 +160,32 @@ async function main() {
       "None",
       300,
       new Date(),
-      ["laundry", "errands"]
+      ["Quick", "Household"]
     );
-    solidsArray.push(userSolids[0]);
-    solidsArray.push(userSolids[1]);
+    const userSolids = [solid1._id, solid2._id];
     userData.updateUser(
       user._id,
       user.name,
       user.username,
       user.password,
       user.email,
-      userSolids
+      userSolids,
+      user.solidsCompleted,
+      user.isBuddy
     );
   }
 
   // Generate Comments
-  let commentsArray = [];
+  const solidsArray = await solidData.getAllSolids();
+
   for (solid of solidsArray) {
-    comment = await comments.addComment(
+    const comment = await commentData.addComment(
       solid.postedBy,
       "This is a comment by the solid owner",
       solid._id,
       new Date()
     );
-    solids.updateSolid(
+    solidData.updateSolid(
       solid._id,
       solid.location,
       solid.description,
@@ -207,6 +199,8 @@ async function main() {
       solid.tags
     );
   }
+
+  console.log("Database successfully seeded!");
 }
 
 main();

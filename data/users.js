@@ -84,7 +84,6 @@ let exportedMethods = {
     isBuddy
   ) {
     const user = await this.getUserById(id);
-    console.log(user);
 
     if (
       !name ||

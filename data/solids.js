@@ -96,7 +96,6 @@ let exportedMethods = {
     tags
   ) {
     const solid = await this.getSolidById(id);
-    console.log(solid);
     if (location)
       if (typeof location !== "string") throw "location must be a string";
     if (description)
