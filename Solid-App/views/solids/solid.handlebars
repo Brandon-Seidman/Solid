@@ -1,0 +1,43 @@
+<title>Solid</title>
+<div>
+    <h1>Solid</h1>
+    <h2>Created by: {{creator.username}} {{solid.timestamp}}</h2>
+    <p>Location: {{solid.location}}</p>
+    <p>Payment: {{solid.price}}</p>
+    <p>Description: {{solid.description}}</p>
+    <p>Tags</p>
+    <ul>
+        {{#each solid.tags}}
+        <li>{{this}}</li>
+        {{/each}}
+    </ul>
+    {{#if solid.completed}}
+    <p>This Solid has already been completed.</p>
+    {{else if solid.accepted}}
+    <p>This Solid has already been accepted.</p>
+    {{else}}
+    <form action="/accept" method="POST">
+        <label for="accept">
+            <button type="submit" value="Accept">
+                Accept
+            </button>
+        </label>
+    </form>
+    {{/if}}
+</div>
+<div id="comments">
+    {{#each comments}}
+    <div id="comment">
+        <p>{{this.commentBy}} {{this.timestamp}}</p>
+        <p>{{this.description}}</p>
+    </div>
+    {{/each}}
+    <form id="comment-form" action="/comment" method="POST">
+        <label for="comment">
+            <input type="text" id="comment-input" name="comment" placeholder="Enter your comment here" />
+        </label>
+        <button type="submit" value="Submit">
+            Submit
+        </button>
+    </form>
+</div>

@@ -1,9 +1,9 @@
 <script src="https://kit.fontawesome.com/9764bc42f4.js" crossorigin="anonymous"></script>
 
 <style>
-  body {
-    background-color: #dae0da;
-  }
+body {
+  background-color: #dae0da;
+}
 </style>
 
 <ul class="nblist">
@@ -15,24 +15,9 @@
   <li class="nbli"><a class="nb" href="/logout">Logout</a></li>
 </ul>
 
-<h1 class="searchtitlemain">CHOOSE A SEARCH METHOD</h1>
+<h1 class="titlesearch">KEYWORD SEARCH<h1>
 
-<div class="imagedivs">
-  <h2 class="searchtitle">KEYWORD</h2>
-
-  <a href="/searchkw">
-    <i class="fas fa-key fa-9x"></i>
-  </a>
-
-  <h2 class="searchtitle">SOLID TAG</h2>
-
-  <a href="/searchst">
-    <i class="fas fa-tags fa-9x"></i>
-  </a>
-
-  <h2 class="searchtitle">LOCATION</h2>
-
-  <a href="/searchlo">
-    <i class="fas fa-globe-americas fa-9x"></i>
-  </a>
-</div>
+<label for="search" class="smalllabel">
+  Keyword: <input type="text" name="searchTerm" id="searchTerm" placeholder="Enter a term" class="submits">
+</label>
+<input type="submit" value="Submit" id="button" class="submits">
