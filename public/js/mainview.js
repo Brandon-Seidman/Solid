@@ -1,14 +1,14 @@
-
-
 (function ($) {
-  function formCheck(title, body) {
-    if (!body || !body.trim() || !price || !tags )
+  function formCheck(price, body) {
+    if (!body || !body.trim() || !price)
       throw "Please input a description, price, and tags for your solid";
-
+    if (typeof body !== "string") throw "Description must be a string";
+    if (!Number.isInteger(parseInt(price))) throw "Price must be an Integer";
+    if (price <= 0) throw "Price must be greater than 0";
     return "ok";
   }
 
-  const form = document.getElementById("login-form");
+  const form = document.getElementById("post_solid");
   if (form) {
     form.addEventListener(
       "submit",
@@ -16,45 +16,39 @@
         try {
           event.preventDefault();
           const body = document.getElementById("body").value;
-          const price =document.getElementById("price").value;
+          const price = document.getElementById("price").value;
           const date = new Date().toDateString();
-          const user = document.getElementById("user").value;
+          const user = document.getElementById("name").value;
 
-          if(!location || !description || !postedBy || !accepted|| !completed|| !comments|| !buddyID|| !price|| !timestamp|| !tags)
-          formCheck("07030",body,, false, false,[],"", price,date, []);
+          formCheck(price, body);
           //make call to server
-          const solid = {body: body, tags: [] };
-          let response = await fetch("/login", {
+
+          const solid = {
+            location: "07030",
+            description: body,
+            postedBy: user,
+            accepted: false,
+            completed: false,
+            comments: [],
+            buddyID: "None",
+            price: parseInt(price),
+            timestamp: date,
+            tags: [],
+          };
+          let response = await fetch("/mainview", {
             method: "POST",
             headers: {
               Accept: "application/json, text/plain, */*",
               "Content-Type": "application/json",
             },
-            body: JSON.stringify(user),
+            body: JSON.stringify(solid),
           });
           console.log(response);
           if (response.status !== 200) {
-            throw "Incorrect username or password";
-          } else {
-            window.location = "/mainview";
+            throw "An Error Occured";
           }
         } catch (e) {
-          const messages = document.getElementById("messages");
-          const error = document.getElementById("error");
-          if (!error) {
-            let newError = document.createElement("h2");
-            newError.textContent = `${e}`;
-            newError.setAttribute("id", "error");
-
-            messages.appendChild(newError);
-          } else {
-            error.remove();
-            newError = document.createElement("h2");
-
-            newError.textContent = `${e}`;
-            newError.setAttribute("id", "error");
-            messages.appendChild(newError);
-          }
+          console.log(e);
         }
       }
       // otherwise that means they successfully logged in! Take them to authentication page

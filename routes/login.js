@@ -11,7 +11,9 @@ router.post("/", async (req, res) => {
   try {
     const { username, password } = req.body;
 
-    const db = await dbConnection();
+    if (!username || !username.trim() || !password || !password.trim()) {
+      throw "Error: No username or password received";
+    }
 
     const users = await userData.getAllUsers();
 

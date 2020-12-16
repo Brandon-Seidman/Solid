@@ -31,22 +31,6 @@ let exportedMethods = {
   ) {
     const solidCollection = await solids();
 
-<<<<<<< HEAD
-	if(!location || !description || !postedBy || accepted==null|| completed==null|| !comments|| !buddyID|| !price|| !timestamp|| !tags)
-		throw "Please provide all data when creating a solid";
-
-	if (typeof location !== 'string') throw "location must be a string";
-	if (typeof description !== 'string') throw "description must be a string";
-	if (typeof postedBy !== 'string') throw "postedBy must be a string";
-	if (typeof accepted !== 'boolean') throw "accepted must be a boolean";
-	if (typeof completed !== 'boolean') throw "completed must be a boolean";
-	if (!Array.isArray(comments)) throw "comments must be a array";
-	if (typeof buddyID !== 'string') throw "buddyID must be a string";
-	if (typeof price !== 'number') throw "price must be a number";
-	if (typeof timestamp !== 'object') throw "timestamp must be a date";
-	if (!Array.isArray(tags)) throw "tags must be a array";
-	
-=======
     if (
       !location ||
       !description ||
@@ -70,7 +54,6 @@ let exportedMethods = {
     if (typeof buddyID !== "string") throw "buddyID must be a string";
     if (typeof price !== "number") throw "price must be a number";
 
->>>>>>> Routes for post started
     let newSolid = {
       location: location,
       description: description,
@@ -114,29 +97,6 @@ let exportedMethods = {
   ) {
     const solid = await this.getSolidById(id);
     console.log(solid);
-<<<<<<< HEAD
-	if(location)
-		if (typeof location !== 'string') throw "location must be a string";
-	if(description)
-		if (typeof description !== 'string') throw "description must be a string";
-	if(postedBy)
-		if (typeof postedBy !== 'string') throw "postedBy must be a string";
-	if(accepted!==null)
-		if (typeof accepted !== 'boolean') throw "accepted must be a boolean";
-	if(completed!==null)
-		if (typeof completed !== 'boolean') throw "completed must be a boolean";
-	if(comments)
-		if (!Array.isArray(comments)) throw "comments must be a array";
-	if(buddyID)
-		if (typeof buddyID !== 'string') throw "buddyID must be a string";
-	if(price)
-		if (typeof price !== 'number') throw "price must be a number";
-	if(timestamp)
-		if (typeof timestamp !== 'object') throw "timestamp must be a date";
-	if(tags)
-		if (!Array.isArray(tags)) throw "comments must be a array";
-		
-=======
     if (location)
       if (typeof location !== "string") throw "location must be a string";
     if (description)
@@ -153,7 +113,6 @@ let exportedMethods = {
       if (typeof buddyID !== "string") throw "buddyID must be a string";
     if (price) if (typeof price !== "number") throw "price must be a number";
 
->>>>>>> Routes for post started
     const solidUpdateInfo = {
       location: location,
       description: description,

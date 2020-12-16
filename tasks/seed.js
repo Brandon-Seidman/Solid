@@ -7,7 +7,6 @@ const dbConnection = require("../config/mongoConnection");
 const data = require("../data");
 const userData = data.users;
 const bcrypt = require("bcrypt");
-const saltRounds = 16;
 
 async function main() {
   const db = await dbConnection();
@@ -26,34 +25,19 @@ async function main() {
     userData
   ) {
     let saltRounds = 10;
-    await bcrypt.genSalt(saltRounds, async function (err, salt) {
-      if (err) {
-        console.log(err);
-        return;
-      }
-      bcrypt.hash(password, salt, async function (err, hash) {
-        try {
-          console.log(
-            `Name: ${name}, User: ${username}, HashedPAssword: ${hash}, email: ${email}`
-          );
-          let newUser = await userData.addUser(
-            name,
-            username,
-            hash,
-            email,
-            solids_made,
-            0,
-            false
-          );
-          usersArray.push(newUser);
-
-          return newUser;
-        } catch (e) {
-          console.log(e);
-        }
-      });
-    });
-    return;
+    let hash = await bcrypt.hash(password, saltRounds);
+    let newUser = await userData.addUser(
+      name,
+      username,
+      hash,
+      email,
+      solids_made,
+      0,
+      false
+    );
+    console.log(newUser);
+    usersArray.push(newUser);
+    return newUser;
   }
 
   // **** POPULATE DATABASE WITH USERS **** //
@@ -155,6 +139,9 @@ async function main() {
     [],
     userData
   );
+  let users = await userData.getAllUsers();
+  console.log(users);
+
   console.log("Database successfully seeded!");
 
   // Generate Solids
@@ -187,7 +174,7 @@ async function main() {
     );
     solidsArray.push(userSolids[0]);
     solidsArray.push(userSolids[1]);
-    users.updateUser(
+    userData.updateUser(
       user._id,
       user.name,
       user.username,
