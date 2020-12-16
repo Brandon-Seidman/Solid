@@ -21,8 +21,7 @@
       </button>
     </div>
     {{!-- modal for post a solid form --}}
-    <div class="modal fade" id="solidPostModal" role="dialogue" tabindex="-1" aria-labelledby="modal"
-      aria-hidden="true">
+    <div class="modal" id="solidPostModal" role="dialogue" tabindex="-1" aria-labelledby="modal" aria-hidden="true">
       <div class="modal-dialog  modal-lg">
         <div class="modal-content">
           <div class="modal-body">
@@ -116,17 +115,17 @@
       </div>
     </a> -->
 
-{{#each solid}}
-  <a class="solidcardlink" href = "">
-    <div class="solidcard">
-      <div class="cardelem">{{this.postedBy}}</div>
-      <div class="cardelem">{{this.description}}</div>
-      <div class="cardelem">${{this.price}}</div>
-      <div class="cardelem">{{this.location}}</div>
-      <div class="cardelem">{{this.timestamp}}</div>
-      <div class="cardelembot">{{this.tags}}</div>
-    </div>
-  </a>
-{{/each}}
+    {{#each solid}}
+    <a class="solidcardlink" href="">
+      <div class="solidcard">
+        <div class="cardelem">{{this.postedBy}}</div>
+        <div class="cardelem">{{this.description}}</div>
+        <div class="cardelem">${{this.price}}</div>
+        <div class="cardelem">{{this.location}}</div>
+        <div class="cardelem">{{this.timestamp}}</div>
+        <div class="cardelembot">{{this.tags}}</div>
+      </div>
+    </a>
+    {{/each}}
 
-<script type="text/javascript" src="../../public/js/mainview.js"></script>
+    <script type="text/javascript" src="../../public/js/mainview.js"></script>
