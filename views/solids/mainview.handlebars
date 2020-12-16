@@ -21,14 +21,15 @@
       </button>
     </div>
     {{!-- modal for post a solid form --}}
-    <div class="modal" id="solidPostModal" role="dialogue" tabindex="-1" aria-labelledby="modal" aria-hidden="true">
-      <div class="modal-dialog  modal-lg">
+    <div class="modal fade" id="solidPostModal" role="dialogue" tabindex="-1" aria-labelledby="modal"
+      aria-hidden="true">
+      <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-body">
             <form id="post_solid" class="form">
               <div class="mb-3">
                 <label for="body" class="form-label">Let's do you a solid.</label>
-                <textarea type="body" rows="4" cols="50" class="form-control" id="body"></textarea>
+                <textarea type="body" rows="3" cols="30" class="form-control" id="body"></textarea>
               </div>
               <div class="input-group mb-3">
                 <div class="container">
@@ -88,16 +89,20 @@
                 </div>
 
               </div>
-              <button type="submit" value="Submit" data-dismiss="modal" form="post_solid">
+              <button type="submit" value="Submit">
                 Submit
               </button>
             </form>
 
+
+
           </div>
+          <button data-dismiss="modal" class="btn" type="button">
+            Close
+          </button>
         </div>
       </div>
     </div>
-
 
 
     <!-- <a class="solidcardlink" href="">

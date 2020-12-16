@@ -15,10 +15,12 @@
       async (event) => {
         try {
           event.preventDefault();
+
           const body = document.getElementById("body").value;
           const price = document.getElementById("price").value;
           const date = new Date().toDateString();
           const user = document.getElementById("name").value;
+          const modal = document.getElementById("solidPostModal");
           const formTags = [
             document.getElementById("shopping"),
             document.getElementById("pickup"),
@@ -32,7 +34,6 @@
             document.getElementById("household"),
             document.getElementById("quick"),
           ];
-
           formCheck(price, body);
           let tags = [];
           for (let i = 0; i < formTags.length; i++) {
@@ -40,7 +41,9 @@
               tags.push(formTags[i].id);
             }
           }
+
           //make call to server
+          document.getElementById("post_solid").reset();
           const solid = {
             location: "Not Provided",
             description: body,
@@ -62,6 +65,7 @@
             body: JSON.stringify(solid),
           });
           console.log(response);
+
           if (response.status !== 200) {
             throw "An Error Occured";
           }
