@@ -1,11 +1,9 @@
-const users = require("../data/users");
-const solids = require("../data/solids");
-const comments = require("../data/comments");
-
 const dbConnection = require("../config/mongoConnection");
 
 const data = require("../data");
 const userData = data.users;
+const solidData = data.solids;
+const commentData = data.comments;
 const bcrypt = require("bcrypt");
 
 async function main() {
@@ -145,10 +143,9 @@ async function main() {
   console.log("Database successfully seeded!");
 
   // Generate Solids
-  let solidsArray = [];
   for (user of usersArray) {
     let userSolids = [];
-    userSolids[0] = await solids.addSolid(
+    userSolids[0] = await solidData.addSolid(
       "07030",
       `${user.username}'s Solid 1`,
       user._id,
@@ -160,7 +157,7 @@ async function main() {
       new Date(),
       ["laundry", "errands"]
     );
-    userSolids[1] = await solids.addSolid(
+    userSolids[1] = await solidData.addSolid(
       "07030",
       `${user.username}'s Solid 2`,
       user._id,
@@ -172,8 +169,6 @@ async function main() {
       new Date(),
       ["laundry", "errands"]
     );
-    solidsArray.push(userSolids[0]);
-    solidsArray.push(userSolids[1]);
     userData.updateUser(
       user._id,
       user.name,
@@ -185,15 +180,16 @@ async function main() {
   }
 
   // Generate Comments
-  let commentsArray = [];
+  const solidsArray = solidData.getAllSolids();
+
   for (solid of solidsArray) {
-    comment = await comments.addComment(
+    comment = await commentData.addComment(
       solid.postedBy,
       "This is a comment by the solid owner",
       solid._id,
       new Date()
     );
-    solids.updateSolid(
+    solidData.updateSolid(
       solid._id,
       solid.location,
       solid.description,
