@@ -228,3 +228,14 @@ a {
 .error{
   margin-top: 15px;
 }
+
+/* Individual Solid Page */
+#comment-section {
+  flex-direction: column;
+}
+
+.comment {
+  flex-direction: column;
+  border-style: double;
+  width: auto;
+}
