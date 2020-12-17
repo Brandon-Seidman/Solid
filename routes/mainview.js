@@ -65,7 +65,7 @@ router.post("/", async (req, res) => {
     comments,
     buddyID,
     price,
-    timestamp,
+    new Date(),
     tags
   );
 });
