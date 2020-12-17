@@ -22,10 +22,6 @@ router.get("/", async (req, res) => {
   });
 });
 
-router.get("/location", async (req, res) => {
-  const user = await userData.getUserByUsername(req.user);
-  return user.zip;
-});
 router.post("/", async (req, res) => {
   const {
     location,

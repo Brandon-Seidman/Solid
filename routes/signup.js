@@ -40,27 +40,20 @@ router.post("/", async (req, res) => {
     // IF NOT - ADD TO DATABASE
     const saltRounds = 10;
 
-    await bcrypt.genSalt(saltRounds, async function (err, salt) {
-      if (err) {
-        console.log(err);
-      }
-      await bcrypt.hash(password, salt, async function (err, hash) {
-        let newUser = await users.addUser(
-          `${first_name} ${last_name}`,
-          username,
-          hash,
-          email,
-          zip,
-          [],
-          0,
-          false
-        );
-        let userlist = await getAllUsers();
-        console.log(userlist);
-        res.cookie("AuthCookie", username);
-        res.redirect("/");
-      });
-    });
+    let hash = await bcrypt.hash(password, saltRounds);
+    let newUser = await users.addUser(
+      `${first_name} ${last_name}`,
+      username,
+      hash,
+      email,
+      zip,
+      [],
+      0,
+      false
+    );
+    console.log(newUser);
+    res.cookie("AuthCookie", username);
+    res.redirect("/");
 
     // LOG USER IN
     //FIX ERROR CAN'T CHANGE SCREENS
