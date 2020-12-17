@@ -67,23 +67,39 @@
           };
 
           $.ajax().then(function () {
-            var newSolid = $("<a></a>", { class: "solidcardlink" });
+            var newSolid = $("<a class='solidCardLink'></a>", {});
             var card = $("<div class='solidcard'></div>", {});
-            var elem = $(`<div class="cardelem" >${user}</div>`, {});
+            var solidContent = $("<div class='solidContent'></div>", {});
+            var cardText = $("<div class='solidText'></div>", {});
+            var elem = $(
+              `<div class="cardelem" ><p>Posted by: ${user}</p></div>`,
+              {}
+            );
 
-            card.append(elem);
-            elem = $(`<div class="cardelem" >${body}</div>`, {});
+            cardText.append(elem);
+            elem = $(
+              `<div class="cardelem" ><p>The Job: ${body}</p></div>`,
+              {}
+            );
             // elem.attr("text", body);
-            card.append(elem);
-            elem = $(`<div class="cardelem" >$${price}</div>`, {});
-            card.append(elem);
-            elem = $(`<div class="cardelem" >${zip}</div>`, {});
-            card.append(elem);
-            elem = $(`<div class="cardelem" >${new Date()}</div>`, {});
-            card.append(elem);
-            elem = $(`<div class="cardbot" >${tags}</div>`, {});
-            card.append(elem);
-            newSolid.prepend(card);
+            cardText.append(elem);
+            elem = $(`<div class="cardelem"><p>$${price}</p></div>`, {});
+            cardText.append(elem);
+            elem = $(`<div class="cardelem" ><p>Zipcode: ${zip}</p></div>`, {});
+            cardText.append(elem);
+            elem = $(
+              `<div class="cardelem" ><p>Posted on: ${new Date()}<p></div>`,
+              {}
+            );
+            cardText.append(elem);
+            elem = $(
+              `<div class="cardelembot" ><p>Tags: ${tags}</p></div>`,
+              {}
+            );
+            cardText.append(elem);
+            solidContent.prepend(cardText);
+            card.append(solidContent);
+            newSolid.append(card);
             let mainPage = $("#cardArea");
             mainPage.prepend(newSolid);
           });

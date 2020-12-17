@@ -1,5 +1,5 @@
 (function ($) {
-	function formCheck(price, body) {
+  function formCheck(price, body) {
     if (!body || !body.trim() || !price)
       throw "Please input a description, and price for your solid. Tags are recommended but not required.";
     if (typeof body !== "string") throw "Description must be a string";
@@ -22,7 +22,7 @@
           const body = document.getElementById("body").value;
           const price = document.getElementById("price").value;
           const user = document.getElementById("name").value;
-		  const id = document.getElementById("id").value;
+          const id = document.getElementById("id").value;
           const formTags = [
             document.getElementById("shopping"),
             document.getElementById("pickup"),
@@ -44,8 +44,8 @@
               tags.push(formTags[i].id);
             }
           }
-		  
-		  $("#solidPostModal").modal("toggle");
+
+          $("#solidPostModal").modal("toggle");
           $.ajax().then(function () {
             var newSolid = $("<a></a>", { class: "solidcardlink" });
             var card = $("<div class='solidcard'></div>", {});
@@ -67,8 +67,8 @@
             let mainPage = $("#card");
             mainPage.replaceWith(newSolid);
           });
-		  const solid = {
-			id:id,
+          const solid = {
+            id: id,
             location: "Not Provided",
             description: body,
             postedBy: user,
@@ -80,7 +80,7 @@
             timestamp: new Date(),
             tags: tags,
           };
-			
+
           let response = await fetch("/solids", {
             method: "PUT",
             headers: {
@@ -89,13 +89,12 @@
             },
             body: JSON.stringify(solid),
           });
-		
+
           console.log(response);
 
           if (response.status !== 200) {
             throw "An Error Occured";
           }
-        
         } catch (e) {
           console.log(e);
         }

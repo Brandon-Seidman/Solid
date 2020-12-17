@@ -16,18 +16,31 @@
       </label>
       <input type="submit" value="Submit" id="button" class="submits">
     </form>
+
     <div id="cardArea">
       {{#each solid}}
       <a class="solidcardlink" href="/solids/{{this._id}}">
         <div class="solidcard">
           <div class="solidContent">
-            <div class="solidText">
-              <div class="cardelem">{{this.postedBy}}</div>
-              <div class="cardelem">{{this.description}}</div>
-              <div class="cardelem">${{this.price}}</div>
-              <div class="cardelem">{{this.location}}</div>
-              <div class="cardelem">{{this.timestamp}}</div>
-              <div class="cardelembot">{{this.tags}}</div>
+            <div class='solidText'>
+              <div class="cardelem">
+                <p>Posted By: {{this.postedBy}}</p>
+              </div>
+              <div class="cardelem">
+                <p>The Job: {{this.description}}</p>
+              </div>
+              <div class="cardelem">
+                <p>${{this.price}}</p>
+              </div>
+              <div class="cardelem">
+                <p>Zipcode: {{this.location}}</p>
+              </div>
+              <div class="cardelem">
+                <p>Posted on:{{this.timestamp}}</p>
+              </div>
+              <div class="cardelembot">
+                <p>Tags: {{this.tags}}</p>
+              </div>
             </div>
           </div>
         </div>
