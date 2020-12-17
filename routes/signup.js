@@ -40,41 +40,28 @@ router.post("/", async (req, res) => {
     // IF NOT - ADD TO DATABASE
     const saltRounds = 10;
 
-    await bcrypt.genSalt(saltRounds, async function (err, salt) {
-      if (err) {
-        console.log(err);
-      }
-      await bcrypt.hash(password, salt, async function (err, hash) {
-        let newUser = await users.addUser(
-          `${first_name} ${last_name}`,
-          username,
-          hash,
-          email,
-          zip,
-          [],
-          0,
-          false
-        );
-
-        res.cookie("AuthCookie", username);
-        res.redirect("/mainview");
-      });
-    });
+    let hash = await bcrypt.hash(password, saltRounds);
+    let newUser = await users.addUser(
+      `${first_name} ${last_name}`,
+      username,
+      hash,
+      email,
+      zip,
+      [],
+      0,
+      false
+    );
+    res.cookie("AuthCookie", username);
+    return res.redirect("/mainview");
 
     // LOG USER IN
     //FIX ERROR CAN'T CHANGE SCREENS
   } catch (e) {
     console.log(e);
-    try {
-      // FIX ERROR RES.REDIRECT NOT WORKING
-      return res.render("login/signup.handlebars", {
-        Error: true,
-        ErrorMessage: e,
-      });
-    } catch (e) {
-      console.log(e);
-    }
-    return;
+    return res.status(401).render("login/signup.handlebars", {
+      title: "Sign Up",
+      error: true,
+    });
   }
 });
 

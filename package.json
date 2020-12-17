@@ -19,6 +19,8 @@
     "express-session": "^1.17.1",
     "handlebars": "^4.7.6",
     "mongodb": "^3.6.3",
+    "require.js": "^1.0.0",
+    "requirejs": "^2.3.6",
     "uuid": "^8.3.2"
   }
 }
