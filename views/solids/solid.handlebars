@@ -1,9 +1,8 @@
-<title>Solid</title>
 <div>
     <h1>Solid</h1>
     <h2>Created by: {{creator.username}} {{solid.timestamp}}</h2>
     <p>Location: {{solid.location}}</p>
-    <p>Payment: {{solid.price}}</p>
+    <p>Payment: ${{solid.price}}</p>
     <p>Description: {{solid.description}}</p>
     <p>Tags</p>
     <ul>
@@ -13,11 +12,30 @@
     </ul>
     {{#if solid.completed}}
     <p>This Solid has already been completed.</p>
+    {{else if acceptedSolid}}
+    <form action="/solids/complete" method="POST">
+        <label for="complete">
+            <input type="hidden" name="id" value="{{solid._id}}" />
+            <button type="submit" value="Complete">
+                Complete
+            </button>
+        </label>
+    </form>
     {{else if solid.accepted}}
     <p>This Solid has already been accepted.</p>
+    {{else if createdSolid}}
+    <form action="/" method="GET">
+        <label for="edit">
+            <input type="hidden" name="id" value="{{solid._id}}" />
+            <button type="submit" value="Edit">
+                Edit
+            </button>
+        </label>
+    </form>
     {{else}}
-    <form action="/accept" method="POST">
+    <form action="/solids/accept" method="POST">
         <label for="accept">
+            <input type="hidden" name="id" value="{{solid._id}}" />
             <button type="submit" value="Accept">
                 Accept
             </button>
@@ -28,12 +46,13 @@
 <div id="comments">
     {{#each comments}}
     <div id="comment">
-        <p>{{this.commentBy}} {{this.timestamp}}</p>
-        <p>{{this.description}}</p>
+        <p>{{commentBy}} {{timestamp}}</p>
+        <p>{{description}}</p>
     </div>
     {{/each}}
-    <form id="comment-form" action="/comment" method="POST">
+    <form id="comment-form" action="/solids/comment" method="POST">
         <label for="comment">
+            <input type="hidden" name="id" value="{{solid._id}}" />
             <input type="text" id="comment-input" name="comment" placeholder="Enter your comment here" />
         </label>
         <button type="submit" value="Submit">
