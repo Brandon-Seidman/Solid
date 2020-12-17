@@ -17,7 +17,8 @@ h1 {
 }
 
 div#messages,
-div#main {
+div#main,
+div#cardArea {
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;

@@ -31,6 +31,9 @@
       throw "Username must be at least 5 characters";
     if (newUser.password.length < 8)
       throw "Password must be at least 8 characters";
+    if (newUser.zip.length !== 5) {
+      throw "Invalid Zipcode";
+    }
     // we can add more constraints later if you guys want
     return "Ok";
   }
@@ -62,8 +65,10 @@
             },
             body: JSON.stringify(newUser),
           });
-          if (response === 200) {
+          if (response.status === 200) {
             window.location = "/mainview";
+          } else {
+            throw "Oh no! Looks like that username or email is already taken!";
           }
           return;
         } catch (e) {

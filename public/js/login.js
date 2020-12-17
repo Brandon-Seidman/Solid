@@ -33,7 +33,6 @@
             },
             body: JSON.stringify(user),
           });
-          console.log(response);
           if (response.status !== 200) {
             throw "Incorrect username or password";
           } else {
@@ -50,7 +49,7 @@
             messages.appendChild(newError);
           } else {
             error.remove();
-            newError = document.createElement("h2");
+            let newError = document.createElement("h2");
 
             newError.textContent = `${e}`;
             newError.setAttribute("id", "error");

@@ -15,6 +15,7 @@
       async (event) => {
         try {
           event.preventDefault();
+
           const body = document.getElementById("body").value;
           const price = document.getElementById("price").value;
           const date = new Date().toDateString();
@@ -32,7 +33,6 @@
             document.getElementById("household"),
             document.getElementById("quick"),
           ];
-
           formCheck(price, body);
           let tags = [];
           for (let i = 0; i < formTags.length; i++) {
@@ -40,7 +40,9 @@
               tags.push(formTags[i].id);
             }
           }
+
           //make call to server
+          document.getElementById("post_solid").reset();
           const solid = {
             location: "Not Provided",
             description: body,
@@ -53,6 +55,28 @@
             timestamp: date,
             tags: tags,
           };
+
+          $.ajax().then(function () {
+            var newSolid = $("<a></a>", { class: "solidcardlink" });
+            var card = $("<div class='solidcard'></div>", {});
+            var elem = $(`<div class="cardelem" >${user}</div>`, {});
+
+            card.append(elem);
+            elem = $(`<div class="cardelem" >${body}</div>`, {});
+            // elem.attr("text", body);
+            card.append(elem);
+            elem = $(`<div class="cardelem" >$${price}</div>`, {});
+            card.append(elem);
+            elem = $(`<div class="cardelem" >07030</div>`, {});
+            card.append(elem);
+            elem = $(`<div class="cardelem" >${date}</div>`, {});
+            card.append(elem);
+            elem = $(`<div class="cardbot" >${tags}</div>`, {});
+            card.append(elem);
+            newSolid.prepend(card);
+            let mainPage = $("#cardArea");
+            mainPage.prepend(newSolid);
+          });
           let response = await fetch("/mainview", {
             method: "POST",
             headers: {
@@ -62,6 +86,7 @@
             body: JSON.stringify(solid),
           });
           console.log(response);
+
           if (response.status !== 200) {
             throw "An Error Occured";
           }
@@ -72,4 +97,4 @@
       // otherwise that means they successfully logged in! Take them to authentication page
     );
   }
-})(window.jquery);
+})(window.jQuery);

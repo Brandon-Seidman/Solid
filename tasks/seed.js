@@ -135,7 +135,7 @@ async function main() {
     const solid1 = await solidData.addSolid(
       `${user.zip}`,
       `${user.username}'s Solid 1`,
-      user._id,
+      user.username,
       false,
       false,
       [],
@@ -147,7 +147,7 @@ async function main() {
     const solid2 = await solidData.addSolid(
       `${user.zip}`,
       `${user.username}'s Solid 2`,
-      user._id,
+      user.username,
       false,
       false,
       [],

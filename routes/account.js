@@ -17,10 +17,9 @@ let authentication = async function (req, res, next) {
 router.use(authentication);
 router.get("/", async (req, res) => {
   let username = req.cookies.AuthCookie;
-  const user = await users.getUserByUsername(username);
-  const solid = await solidData.getSolidByUser(user._id);
-  console.log(username);
-  console.log(solid);
+  
+  const solid = await solidData.getSolidByUser(username);
+
   return res.render("solids/account.handlebars", {
 	title: "My Account", 
     solid: solid
