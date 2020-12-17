@@ -59,7 +59,7 @@ let exportedMethods = {
 
     let newUser = {
       name: name,
-      username: username,
+      username: username.toLowerCase(),
       password: password,
       email: email,
       solidsCreated: solidsCreated,
@@ -124,7 +124,7 @@ let exportedMethods = {
     if (zip) if (typeof zip !== "string") throw "zip must be a string";
     const userUpdateInfo = {
       name: name,
-      username: username,
+      username: username.toLowerCase(),
       password: password,
       email: email,
       solidsCreated: solidsCreated,

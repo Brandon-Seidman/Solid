@@ -3,7 +3,7 @@ const logout = require("./logout");
 const signup = require("./signup");
 const private = require("./private");
 const mainview = require("./mainview");
-//const solids = require("./solids");
+const solids = require("./solids");
 const search = require("./search");
 const searchkw = require("./searchkw");
 const searchst = require("./searchst");
@@ -24,7 +24,7 @@ const constructorMethod = (app) => {
   app.use("/searchst", searchst);
   app.use("/searchlo", searchlo);
   app.use("/account", account);
-  //app.use("/solids", solids);
+  app.use("/solids", solids);
   //app.use(logging);
   app.get("/", async (req, res) => {
     if (!req.cookies.AuthCookie) {
