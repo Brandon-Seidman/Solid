@@ -44,6 +44,7 @@ let exportedMethods = {
   },
 
   async getSolidByTag(tag) {
+    //console.log(typeof(tag));
     const solidCollection = await solids();
     let solid = [];
     const solidsList = await solidCollection.find({}).toArray();
@@ -54,6 +55,7 @@ let exportedMethods = {
         solid.push(solidsList[i]);
       }
     }
+    if (solid == []) throw "solid(s) not found";
     // const solid = await solidCollection.find({  });
     // if (!solid) throw "solid(s) not found";
     return solid;

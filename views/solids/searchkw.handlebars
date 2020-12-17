@@ -17,10 +17,12 @@ body {
 
 <h1 class="titlesearch">KEYWORD SEARCH<h1>
 
+<form action="/searchkw" method="POST">
 <label for="search" class="smalllabel">
   Keyword: <input type="text" name="searchTerm" id="searchTerm" placeholder="Enter a term" class="submits">
 </label>
 <input type="submit" value="Submit" id="button" class="submits">
+</form>
 
 {{#each solid}}
   <a class="solidcardlink" href = "">
@@ -34,3 +36,5 @@ body {
     </div>
   </a>
 {{/each}}
+
+<p class="error">{{error}}</p>

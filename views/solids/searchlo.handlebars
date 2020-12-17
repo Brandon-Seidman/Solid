@@ -17,10 +17,12 @@ body {
 
 <h1 class="titlesearch">LOCATION SEARCH<h1>
 
+<form action="/searchlo" method="POST">
 <label for="search" class="smalllabel">
   Enter Zip Code: <input type="text" name="searchTerm" id="searchTerm" placeholder="ex: 10301" class="submits">
 </label>
 <input type="submit" value="Submit" id="button" class="submits">
+</form>
 
 {{#each solid}}
   <a class="solidcardlink" href = "">
@@ -34,3 +36,5 @@ body {
     </div>
   </a>
 {{/each}}
+
+<p class="error">{{error}}</p>
