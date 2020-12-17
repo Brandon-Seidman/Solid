@@ -1,6 +1,9 @@
+
 <div class="solidcard">
     <h1>Solid</h1>
-    <h2>Created by: {{creator.username}} {{solid.timestamp}}</h2>
+	<div id="card" class="solidcard">
+    <h2>Created by: {{creator.username}}</h2>
+	<h2> {{solid.timestamp}}</h2>
     <p>Location: {{solid.location}}</p>
     <p>Payment: ${{solid.price}}</p>
     <p>Description: {{solid.description}}</p>
@@ -10,6 +13,7 @@
         <li>{{this}}</li>
         {{/each}}
     </ul>
+	</div>
     {{#if solid.completed}}
     <p>This Solid has already been completed.</p>
     {{else if acceptedSolid}}
@@ -37,7 +41,7 @@
           <div class="modal-body">
             <form id="post_solid" class="form">
               <div class="mb-3">
-                <label for="body" class="form-label">Let's do you a solid.</label>
+                <label for="body" class="form-label">Edit Your Solid.</label>
                 <textarea type="body" rows="3" cols="30" class="form-control" id="body"></textarea>
               </div>
               <div class="input-group mb-3">
@@ -107,11 +111,7 @@
                 Submit
               </button>
             </form>
-
-
-
           </div>
-
         </div>
       </div>
     </div>
@@ -125,6 +125,7 @@
         </label>
     </form>
     {{/if}}
+	
 </div>
 <div id="comment-section">
     {{#each comments}}
@@ -143,7 +144,9 @@
         </button>
     </form>
 </div>
- <script type="text/javascript" src="../../public/js/solid.js"></script>
- <script src="https://code.jquery.com/jquery-2.2.4.min.js"
+ 
+<script src="https://rawgit.com/leizongmin/js-xss/master/dist/xss.js"></script>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"
       integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-	  <script src="https://rawgit.com/leizongmin/js-xss/master/dist/xss.js"></script>
+ <script type="text/javascript" src="../../public/js/solid.js"></script>
+    
