@@ -22,7 +22,12 @@ let exportedMethods = {
     if (!user) throw "User not found";
     return user;
   },
-
+  async getUserZipByUsername(usern) {
+    const userCollection = await users();
+    const user = await userCollection.findOne({ username: usern });
+    if (!user) throw "User not found";
+    return user.zip;
+  },
   async addUser(
     name,
     username,

@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
-const dbConnection = require("../config/mongoConnection");
 const data = require("../data/");
+const xss = require("xss");
 const userData = data.users;
 router.get("/", (req, res) => {
   return res.render("login/login.handlebars", { title: "Login" });
@@ -14,8 +14,7 @@ router.post("/", async (req, res) => {
     if (!username || !username.trim() || !password || !password.trim()) {
       throw "Error: No username or password received";
     }
-
-    const users = await userData.getAllUsers();
+    const users = await userData.getAllUsers(username);
 
     let hashedPassword = "";
     let user;
