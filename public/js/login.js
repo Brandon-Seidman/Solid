@@ -41,6 +41,10 @@
         } catch (e) {
           const messages = document.getElementById("messages");
           const error = document.getElementById("error");
+          const loggedOut = document.getElementById("loggedOut");
+          if (loggedOut) {
+            loggedOut.remove();
+          }
           if (!error) {
             let newError = document.createElement("h2");
             newError.textContent = `${e}`;
@@ -49,6 +53,7 @@
             messages.appendChild(newError);
           } else {
             error.remove();
+
             let newError = document.createElement("h2");
 
             newError.textContent = `${e}`;
