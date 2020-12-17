@@ -198,6 +198,7 @@ router.get("/:id", async (req, res) => {
 })
 
 router.put("/", async (req, res) => {
+	console.log("ROuTES!");
   const {
 	id,
     location,
@@ -211,6 +212,7 @@ router.put("/", async (req, res) => {
     timestamp,
     tags,
   } = req.body;
+  
   if (
     !location ||
     !description ||
@@ -234,8 +236,7 @@ router.put("/", async (req, res) => {
 	console.log(req.body);
 	console.log(postedBy);
   const userInfo = await users.getUserByUsername(postedBy);
-  console.log("HERE");
-  console.log(id);
+ 
   let newSolid = await solids.updateSolid(
 	id,
     userInfo.zip,
