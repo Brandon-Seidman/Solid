@@ -1,10 +1,14 @@
 (function ($) {
   function formCheck(price, body) {
     if (!body || !body.trim() || !price)
-      throw "Please input a description, price, and tags for your solid";
+      throw "Please input a description, and price for your solid. Tags are recommended but not required.";
     if (typeof body !== "string") throw "Description must be a string";
     if (!Number.isInteger(parseInt(price))) throw "Price must be an Integer";
     if (price <= 0) throw "Price must be greater than 0";
+    const checkBody = filterXSS(body);
+    if (checkBody !== body) {
+      throw "Error: XSS attack detected";
+    }
     return "ok";
   }
 

@@ -6,6 +6,8 @@
   function formCheck(username, password) {
     if (!username || !username.trim() || !password)
       throw "Invalid username or password";
+    const check = filterXSS(username);
+    if (check !== username) throw "Error XSS attack detected";
 
     return "ok";
   }

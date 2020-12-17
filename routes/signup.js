@@ -4,7 +4,7 @@ const dbConnection = require("../config/mongoConnection");
 const data = require("../data/");
 const users = data.users;
 const bcrypt = require("bcrypt");
-const { nextTick } = require("process");
+const xss = require("xss");
 router.get("/", async (req, res) => {
   res.status(200).render("login/signup.handlebars", { title: "Sign Up" });
   return;
