@@ -224,3 +224,7 @@ a {
 .submits {
   font-size: 30px;
 }
+
+.error{
+  margin-top: 15px;
+}

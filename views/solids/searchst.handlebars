@@ -17,21 +17,37 @@ body {
 
 <h1 class="titlesearch">SOLID TAG SEARCH<h1>
 
+<form action="/searchst" method="POST">
 <label for="search" class="smalllabel">
   Tags:
 </label>
 <select name="searchTerm" id="searchTerm" class="submits">
-  <option value=“shopping”>Shopping</option>
-  <option value=“pickup”>Pickup</option>
-  <option value=“smallTask”>Small Task</option>
-  <option value=“largeTask”>Large Task</option>
-  <option value=“carNeeded”>Car Needed</option>
-  <option value=“art”>Art</option>
-  <option value=“computers”>Computers</option>
-  <option value=“labor”>Labor</option>
-  <option value=“writing”>Writing</option>
-  <option value=“household”>Household</option>
-  <option value=“quick”>Quick</option>
+  <option value='Shopping'>Shopping</option>
+  <option value='Pickup'>Pickup</option>
+  <option value='Small Task'>Small Task</option>
+  <option value='Large Task'>Large Task</option>
+  <option value='Car Needed'>Car Needed</option>
+  <option value='Art'>Art</option>
+  <option value='Computers'>Computers</option>
+  <option value='Labor'>Labor</option>
+  <option value='Writing'>Writing</option>
+  <option value='Household'>Household</option>
+  <option value='Quick'>Quick</option>
 </select>
-
 <input type="submit" value="Submit" id="button" class="submits">
+</form>
+
+{{#each solid}}
+  <a class="solidcardlink" href = "">
+    <div class="solidcard">
+      <div class="cardelem">{{this.postedBy}}</div>
+      <div class="cardelem">{{this.description}}</div>
+      <div class="cardelem">${{this.price}}</div>
+      <div class="cardelem">{{this.location}}</div>
+      <div class="cardelem">{{this.timestamp}}</div>
+      <div class="cardelembot">{{this.tags}}</div>
+    </div>
+  </a>
+{{/each}}
+
+<p class="error">{{error}}</p>
