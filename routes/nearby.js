@@ -18,6 +18,7 @@ let authentication = async function (req, res, next) {
 
 router.use(authentication);
 router.get("/", async (req, res) => {
+  console.log("got here");
   try{
     let username = req.cookies.AuthCookie;
     //console.log(username);
@@ -27,57 +28,52 @@ router.get("/", async (req, res) => {
     //console.log(solid);
     if(solid.length == 0){
       return res.render("solids/nearby.handlebars", {
-        title: "Neaby Solids",
+        title: "Nearby Solids",
         error: "No Solids Near You."
       });
     }else{
       return res.render("solids/nearby.handlebars", {
-    	title: "Neaby Solids",
+    	title: "Nearby Solids",
       solid: solid
       });
     };
   }catch(e){
     res.status(404).render("solids/nearby.handlebars", {
-      title: "Neaby Solids",
+      title: "Nearby Solids",
       error: "Error Finding Solids."
     });
   }
 });
 
-// router.get("/", async (req, res) => {
-//   //solid = await solids.getSolidByLocation('07030');
-//   //console.log(solid);
-//   res.render("solids/searchlo.handlebars", {
-//     title: "Location Search",
-//     //solid: solid
-//   });
-//   return;
-// });
-//
-// router.post('/', async (req, res) => {
-//   let sTerm = req.body.searchTerm;
-//   try {
-//     if (!sTerm || sTerm == '') {
-//       throw 'Enter term';
-//     }
-//     solid = await solids.getSolidByLocation(sTerm);
-//     if(solid.length == 0){
-//       res.render("solids/searchlo.handlebars", {
-//         title: "Location Search",
-//         error: "No Solids Found."
-//       });
-//     } else {
-//       res.render("solids/searchlo.handlebars", {
-//         title: "Loaction Search",
-//         solid: solid,
-//       });
-//     }
-//   }catch(e){
-//     res.status(404).render("solids/searchlo.handlebars", {
-//       title: "Location Search",
-//       error: "Error Finding Solids."
-//     });
-//   }
-// });
+
+router.post('/', async (req, res) => {
+  let sTerm = req.body.searchTerm;
+  console.log("got here2");
+  try {
+    if (!sTerm || sTerm == '') {
+      throw 'Enter term';
+    }
+    let username = req.cookies.AuthCookie;
+    const zip = await users.getUserZipByUsername(username);
+    //console.log(zip);
+    const solid = await solids.getSolidByLocationRange(zip,sTerm);
+    if(solid.length == 0){
+      return res.render("solids/nearby.handlebars", {
+        title: "Nearby Solids",
+        error: "No Solids Near You."
+      });
+    } else {
+      return res.render("solids/nearby.handlebars", {
+      	title: "Nearby Solids",
+        solid: solid
+      });
+    }
+  }catch(e){
+    res.status(404).render("solids/nearby.handlebars", {
+      title: "Nearby Solids",
+      error: "Error Finding Solids."
+    });
+  }
+});
 
 module.exports = router;
