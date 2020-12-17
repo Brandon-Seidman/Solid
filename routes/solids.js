@@ -166,10 +166,12 @@ router.get("/:id", async (req, res) => {
             acceptedSolid = false;
         }
         let createdSolid;
-        if (solid.postedBy === user._id) {
+        if (solid.postedBy === user.username) {
             createdSolid = true;
+            console.log("The user created this solid");
         } else {
             createdSolid = false;
+            console.log("The user did not create this solid")
         }
 
         res.status(200).render("solids/solid.handlebars", {
