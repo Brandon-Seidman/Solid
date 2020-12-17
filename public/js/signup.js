@@ -34,6 +34,21 @@
     if (newUser.zip.length !== 5) {
       throw "Invalid Zipcode";
     }
+
+    const checkU = filterXSS(newUser.username);
+    const checkFN = filterXSS(newUser.first_name);
+    const checkLS = filterXSS(newUser.last_name);
+    const checkZip = filterXSS(newUser.zip);
+    const checkE = filterXSS(newUser.email);
+    if (
+      checkU !== newUser.username ||
+      checkFN !== newUser.first_name ||
+      checkLS !== newUser.last_name ||
+      checkZip !== newUser.zip ||
+      checkE !== newUser.email
+    )
+      throw "Error XSS attack detected, please edit your input";
+
     // we can add more constraints later if you guys want
     return "Ok";
   }

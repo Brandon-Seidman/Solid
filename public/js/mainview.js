@@ -1,10 +1,14 @@
 (function ($) {
   function formCheck(price, body) {
     if (!body || !body.trim() || !price)
-      throw "Please input a description, price, and tags for your solid";
+      throw "Please input a description, and price for your solid. Tags are recommended but not required.";
     if (typeof body !== "string") throw "Description must be a string";
     if (!Number.isInteger(parseInt(price))) throw "Price must be an Integer";
     if (price <= 0) throw "Price must be greater than 0";
+    const checkBody = filterXSS(body);
+    if (checkBody !== body) {
+      throw "Error: XSS attack detected, Please edit your input";
+    }
     return "ok";
   }
 
@@ -20,6 +24,8 @@
           const price = document.getElementById("price").value;
           const date = new Date().toDateString();
           const user = document.getElementById("name").value;
+          const error = document.getElementById("error");
+
           const formTags = [
             document.getElementById("shopping"),
             document.getElementById("pickup"),
@@ -41,6 +47,10 @@
             }
           }
 
+          $("#solidPostModal").modal("toggle");
+          if (error) {
+            error.remove();
+          }
           //make call to server
           document.getElementById("post_solid").reset();
           const solid = {
@@ -92,6 +102,22 @@
           }
         } catch (e) {
           console.log(e);
+          const messages = document.getElementById("messages");
+          const error = document.getElementById("error");
+          if (!error) {
+            let newError = document.createElement("h2");
+            newError.textContent = `${e}`;
+            newError.setAttribute("id", "error");
+
+            messages.appendChild(newError);
+          } else {
+            error.remove();
+            newError = document.createElement("h2");
+
+            newError.textContent = `${e}`;
+            newError.setAttribute("id", "error");
+            messages.appendChild(newError);
+          }
         }
       }
       // otherwise that means they successfully logged in! Take them to authentication page

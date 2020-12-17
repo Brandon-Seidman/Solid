@@ -89,7 +89,9 @@
                 </div>
 
               </div>
-              <button type="submit" value="Submit">
+              <div id="messages">
+              </div>
+              <button type="submit" value="Submit" data-dismis="modal">
                 Submit
               </button>
             </form>
@@ -97,9 +99,7 @@
 
 
           </div>
-          <button data-dismiss="modal" class="btn" type="button">
-            Close
-          </button>
+
         </div>
       </div>
     </div>
@@ -135,6 +135,7 @@
 
       {{/each}}
     </div>
+    <script src="https://rawgit.com/leizongmin/js-xss/master/dist/xss.js"></script>
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"
       integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 
