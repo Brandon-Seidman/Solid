@@ -120,17 +120,22 @@
       </div>
     </a> -->
 
-    {{#each solid}}
-    <a class="solidcardlink" href="">
-      <div class="solidcard">
-        <div class="cardelem">{{this.postedBy}}</div>
-        <div class="cardelem">{{this.description}}</div>
-        <div class="cardelem">${{this.price}}</div>
-        <div class="cardelem">{{this.location}}</div>
-        <div class="cardelem">{{this.timestamp}}</div>
-        <div class="cardelembot">{{this.tags}}</div>
-      </div>
-    </a>
-    {{/each}}
+    <div id="cardArea">
+      {{#each solid}}
+      <a class="solidcardlink" href="">
+        <div class="solidcard">
+          <div class="cardelem">{{this.postedBy}}</div>
+          <div class="cardelem">{{this.description}}</div>
+          <div class="cardelem">${{this.price}}</div>
+          <div class="cardelem">{{this.location}}</div>
+          <div class="cardelem">{{this.timestamp}}</div>
+          <div class="cardelembot">{{this.tags}}</div>
+        </div>
+      </a>
+
+      {{/each}}
+    </div>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"
+      integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 
     <script type="text/javascript" src="../../public/js/mainview.js"></script>

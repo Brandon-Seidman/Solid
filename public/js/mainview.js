@@ -20,7 +20,6 @@
           const price = document.getElementById("price").value;
           const date = new Date().toDateString();
           const user = document.getElementById("name").value;
-          const modal = document.getElementById("solidPostModal");
           const formTags = [
             document.getElementById("shopping"),
             document.getElementById("pickup"),
@@ -56,6 +55,28 @@
             timestamp: date,
             tags: tags,
           };
+
+          $.ajax().then(function () {
+            var newSolid = $("<a></a>", { class: "solidcardlink" });
+            var card = $("<div class='solidcard'></div>", {});
+            var elem = $(`<div class="cardelem" >${user}</div>`, {});
+
+            card.append(elem);
+            elem = $(`<div class="cardelem" >${body}</div>`, {});
+            // elem.attr("text", body);
+            card.append(elem);
+            elem = $(`<div class="cardelem" >$${price}</div>`, {});
+            card.append(elem);
+            elem = $(`<div class="cardelem" >07030</div>`, {});
+            card.append(elem);
+            elem = $(`<div class="cardelem" >${date}</div>`, {});
+            card.append(elem);
+            elem = $(`<div class="cardbot" >${tags}</div>`, {});
+            card.append(elem);
+            newSolid.prepend(card);
+            let mainPage = $("#cardArea");
+            mainPage.prepend(newSolid);
+          });
           let response = await fetch("/mainview", {
             method: "POST",
             headers: {
@@ -76,4 +97,4 @@
       // otherwise that means they successfully logged in! Take them to authentication page
     );
   }
-})(window.jquery);
+})(window.jQuery);

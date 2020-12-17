@@ -55,9 +55,10 @@ router.post("/", async (req, res) => {
           0,
           false
         );
-
+        let userlist = await getAllUsers();
+        console.log(userlist);
         res.cookie("AuthCookie", username);
-        res.redirect("/mainview");
+        res.redirect("/");
       });
     });
 

@@ -22,6 +22,10 @@ router.get("/", async (req, res) => {
   });
 });
 
+router.get("/location", async (req, res) => {
+  const user = await userData.getUserByUsername(req.user);
+  return user.zip;
+});
 router.post("/", async (req, res) => {
   const {
     location,
@@ -55,7 +59,6 @@ router.post("/", async (req, res) => {
     !timestamp.trim()
   )
     throw "Error: All fields require non-empty strings";
-
   const userInfo = await userData.getUserByUsername(postedBy);
   let newSolid = await solidData.addSolid(
     userInfo.zip,
@@ -69,7 +72,5 @@ router.post("/", async (req, res) => {
     timestamp,
     tags
   );
-
-  let solids = await solidData.getAllSolids();
 });
 module.exports = router;
