@@ -47,7 +47,7 @@
       checkZip !== newUser.zip ||
       checkE !== newUser.email
     )
-      throw "Error XSS attack detected";
+      throw "Error XSS attack detected, please edit your input";
 
     // we can add more constraints later if you guys want
     return "Ok";

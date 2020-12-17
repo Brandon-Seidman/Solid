@@ -7,7 +7,8 @@
     if (!username || !username.trim() || !password)
       throw "Invalid username or password";
     const check = filterXSS(username);
-    if (check !== username) throw "Error XSS attack detected";
+    if (check !== username)
+      throw "Error XSS attack detected, Please edit your input";
 
     return "ok";
   }
@@ -23,7 +24,6 @@
             .getElementById("username")
             .value.toLowerCase();
           const password = document.getElementById("password").value;
-          console.log(password);
           formCheck(username, password);
           //make call to server
           const user = { username: username, password: password };

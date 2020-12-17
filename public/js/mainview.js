@@ -7,7 +7,7 @@
     if (price <= 0) throw "Price must be greater than 0";
     const checkBody = filterXSS(body);
     if (checkBody !== body) {
-      throw "Error: XSS attack detected";
+      throw "Error: XSS attack detected, Please edit your input";
     }
     return "ok";
   }
