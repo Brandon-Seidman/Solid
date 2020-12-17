@@ -12,10 +12,12 @@ function isInList(x, lst){
 }
 
 function findLocationRange(loc,x){
-  let num1 = parseInt(loc) + x;
-  let num2 = parseInt(loc) - x;
-
-  if (num1.toString().length == 6){
+  let num1 = parseInt(loc);
+  let num2 = parseInt(loc);
+  num1 = num1+parseInt(x);
+  num2 = num2-parseInt(x);
+  //console.log(num1);
+  if (num1 > 99999){
     num1 = '99999';
   }
   else{
@@ -81,6 +83,8 @@ let exportedMethods = {
   async getSolidByLocationRange(loc,x) {
     let locR = findLocationRange(loc,x);
     const solidCollection = await solids();
+    //console.log(locR[0]);
+    //console.log(locR[1]);
     const solid = await solidCollection.find({ location: {$lte: locR[0], $gte: locR[1]}  });
     if (!solid) throw "solid(s) not found";
     return solid.toArray();
@@ -135,7 +139,7 @@ let exportedMethods = {
     tags
   ) {
     const solidCollection = await solids();
-	
+
     if (
       !location ||
       !description ||
@@ -172,7 +176,7 @@ let exportedMethods = {
       tags: tags,
       _id: uuid.v4(),
     };
-	
+
     const newInsertInformation = await solidCollection.insertOne(newSolid);
     if (newInsertInformation.insertedCount === 0) throw "Insert failed!";
     return await this.getSolidById(newInsertInformation.insertedId);
@@ -237,7 +241,7 @@ let exportedMethods = {
     );
     if (!updateInfo.matchedCount && !updateInfo.modifiedCount)
       throw "Update failed";
-	
+
     return await this.getSolidById(id);
   },
 };
