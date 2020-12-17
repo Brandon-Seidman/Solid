@@ -22,7 +22,7 @@
 
           const body = document.getElementById("body").value;
           const price = document.getElementById("price").value;
-          const date = new Date().toDateString();
+
           const user = document.getElementById("name").value;
           const error = document.getElementById("error");
 
@@ -62,7 +62,7 @@
             comments: [],
             buddyID: "None",
             price: parseInt(price),
-            timestamp: date,
+            timestamp: new Date(),
             tags: tags,
           };
 
@@ -79,27 +79,28 @@
             card.append(elem);
             elem = $(`<div class="cardelem" >07030</div>`, {});
             card.append(elem);
-            elem = $(`<div class="cardelem" >${date}</div>`, {});
+            elem = $(`<div class="cardelem" >${new Date()}</div>`, {});
             card.append(elem);
             elem = $(`<div class="cardbot" >${tags}</div>`, {});
             card.append(elem);
             newSolid.prepend(card);
             let mainPage = $("#cardArea");
             mainPage.prepend(newSolid);
-
-            let response = $.ajax("/mainview", {
-              type: "POST",
-              url: "/mainview",
-              dataType: "json",
-              data: JSON.stringify(solid),
-            });
-            console.log(response);
-  
-            if (response.status !== 200) {
-              throw "An Error Occured";
-            }
           });
-         
+          let response = fetch("/mainview", {
+            method: "POST",
+            headers: {
+              Accept: "application/json, text/plain, */*",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(solid),
+          });
+
+          console.log(response);
+
+          if (response.status !== 200) {
+            throw "An Error Occured";
+          }
         } catch (e) {
           console.log(e);
           const messages = document.getElementById("messages");
