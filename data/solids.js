@@ -135,7 +135,7 @@ let exportedMethods = {
     tags
   ) {
     const solidCollection = await solids();
-
+	
     if (
       !location ||
       !description ||
@@ -237,7 +237,7 @@ let exportedMethods = {
     );
     if (!updateInfo.matchedCount && !updateInfo.modifiedCount)
       throw "Update failed";
-
+	
     return await this.getSolidById(id);
   },
 };
