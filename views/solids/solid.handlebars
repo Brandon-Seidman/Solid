@@ -12,7 +12,7 @@
     </ul>
     {{#if solid.completed}}
     <p>This Solid has already been completed.</p>
-    {{else if isUserSolid}}
+    {{else if acceptedSolid}}
     <form action="/solids/complete" method="POST">
         <label for="complete">
             <input type="hidden" name="id" value="{{solid._id}}" />
@@ -23,6 +23,15 @@
     </form>
     {{else if solid.accepted}}
     <p>This Solid has already been accepted.</p>
+    {{else if createdSolid}}
+    <form action="/" method="GET">
+        <label for="edit">
+            <input type="hidden" name="id" value="{{solid._id}}" />
+            <button type="submit" value="Edit">
+                Edit
+            </button>
+        </label>
+    </form>
     {{else}}
     <form action="/solids/accept" method="POST">
         <label for="accept">

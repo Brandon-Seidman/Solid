@@ -155,11 +155,17 @@ router.get("/:id", async (req, res) => {
         }
 
         const user = await users.getUserByUsername(req.cookies.AuthCookie);
-        let isUserSolid;
+        let acceptedSolid;
         if (solid.buddyID === user._id) {
-            isUserSolid = true;
+            acceptedSolid = true;
         } else {
-            isUserSolid = false;
+            acceptedSolid = false;
+        }
+        let createdSolid;
+        if (solid.postedBy === user._id) {
+            createdSolid = true;
+        } else {
+            createdSolid = false;
         }
 
         res.status(200).render("solids/solid.handlebars", {
@@ -167,7 +173,8 @@ router.get("/:id", async (req, res) => {
             solid: solid,
             creator: creator,
             comments: solidComments,
-            isUserSolid: isUserSolid
+            acceptedSolid: acceptedSolid,
+            createdSolid: createdSolid
         });
     } catch (e) {
         if (e === 'solid not found') {
