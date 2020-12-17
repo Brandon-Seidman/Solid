@@ -172,7 +172,7 @@ let exportedMethods = {
       tags: tags,
       _id: uuid.v4(),
     };
-
+	
     const newInsertInformation = await solidCollection.insertOne(newSolid);
     if (newInsertInformation.insertedCount === 0) throw "Insert failed!";
     return await this.getSolidById(newInsertInformation.insertedId);

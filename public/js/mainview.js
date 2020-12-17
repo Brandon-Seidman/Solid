@@ -87,7 +87,7 @@
             let mainPage = $("#cardArea");
             mainPage.prepend(newSolid);
 
-            let response = await $.ajax("/mainview", {
+            let response = $.ajax("/mainview", {
               type: "POST",
               url: "/mainview",
               dataType: "json",
