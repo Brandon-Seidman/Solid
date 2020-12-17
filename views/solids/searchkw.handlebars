@@ -1,36 +1,41 @@
-<link rel="stylesheet" type="text/css" href="../../public/css/bgcolor.css" media="screen"/>
+<link rel="stylesheet" type="text/css" href="../../public/css/bgcolor.css" media="screen" />
 
 <ul class="nblist">
   <li class="nbli"><a class="homenb nb" href="/mainview">Home</a></li>
   <li class="nbli"><a class="nb" href="/search">Search</a></li>
   <li class="nbli"><a class="nb" href="/nearby">Solids Near Me</a></li>
   <li class="nbli"><a class="nb" href="/account">Account</a></li>
-  <li class="nbli"><a class="nb" href="">Become a Buddy</a></li>
   <li class="nbli"><a class="nb" href="/logout">Logout</a></li>
 </ul>
 
 <h1 class="titlesearch">KEYWORD SEARCH<h1>
 
-<form action="/searchkw" method="POST" class="forms">
-<label for="search" class="smalllabel">
-  Keyword: <input type="text" name="searchTerm" id="searchTerm" placeholder="Enter a term" class="submits">
-</label>
-<input type="submit" value="Submit" id="button" class="submits">
-</form>
+    <form action="/searchkw" method="POST">
+      <label for="search" class="smalllabel">
+        Keyword: <input type="text" name="searchTerm" id="searchTerm" placeholder="Enter a term" class="submits">
+      </label>
+      <input type="submit" value="Submit" id="button" class="submits">
+    </form>
+    <div id="cardArea">
+      {{#each solid}}
+      <a class="solidcardlink" href="/solids/{{this._id}}">
+        <div class="solidcard">
+          <div class="solidContent">
+            <div class="solidText">
+              <div class="cardelem">{{this.postedBy}}</div>
+              <div class="cardelem">{{this.description}}</div>
+              <div class="cardelem">${{this.price}}</div>
+              <div class="cardelem">{{this.location}}</div>
+              <div class="cardelem">{{this.timestamp}}</div>
+              <div class="cardelembot">{{this.tags}}</div>
+            </div>
+          </div>
+        </div>
+      </a>
 
-{{#each solid}}
-  <a class="solidcardlink" href = "/solids/{{this._id}}">
-    <div class="solidcard">
-      <div class="cardelem">{{this.postedBy}}</div>
-      <div class="cardelem">{{this.description}}</div>
-      <div class="cardelem">${{this.price}}</div>
-      <div class="cardelem">{{this.location}}</div>
-      <div class="cardelem">{{this.timestamp}}</div>
-      <div class="cardelembot">{{this.tags}}</div>
+      {{/each}}
     </div>
-  </a>
-{{/each}}
 
-<div>
-<p class="error">{{error}}</p>
-</div>
+    <div>
+      <p class="error">{{error}}</p>
+    </div>

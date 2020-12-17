@@ -15,10 +15,12 @@ let authentication = async function (req, res, next) {
 router.use(authentication);
 router.get("/", async (req, res) => {
   const solid = await solidData.getAllSolids();
+  const zip = await userData.getUserZipByUsername(req.cookies.AuthCookie);
   return res.render("solids/mainview.handlebars", {
     title: "Home",
     solid: solid,
     user: req.cookies.AuthCookie,
+    zip: zip,
   });
 });
 

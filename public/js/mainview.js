@@ -22,7 +22,7 @@
 
           const body = document.getElementById("body").value;
           const price = document.getElementById("price").value;
-
+          const zip = document.getElementById("zip").value;
           const user = document.getElementById("name").value;
           const error = document.getElementById("error");
 
@@ -54,7 +54,7 @@
           //make call to server
           document.getElementById("post_solid").reset();
           const solid = {
-            location: "Not Provided",
+            location: zip,
             description: body,
             postedBy: user,
             accepted: false,
@@ -77,7 +77,7 @@
             card.append(elem);
             elem = $(`<div class="cardelem" >$${price}</div>`, {});
             card.append(elem);
-            elem = $(`<div class="cardelem" >07030</div>`, {});
+            elem = $(`<div class="cardelem" >${zip}</div>`, {});
             card.append(elem);
             elem = $(`<div class="cardelem" >${new Date()}</div>`, {});
             card.append(elem);
@@ -95,8 +95,6 @@
             },
             body: JSON.stringify(solid),
           });
-
-          console.log(response);
 
           if (response.status !== 200) {
             throw "An Error Occured";
