@@ -18,7 +18,7 @@ let authentication = async function (req, res, next) {
 
 router.use(authentication);
 router.get("/", async (req, res) => {
-  console.log("got here");
+  //console.log("got here");
   try{
     let username = req.cookies.AuthCookie;
     //console.log(username);
@@ -48,7 +48,7 @@ router.get("/", async (req, res) => {
 
 router.post('/', async (req, res) => {
   let sTerm = req.body.searchTerm;
-  console.log("got here2");
+  //console.log("got here2");
   try {
     if (!sTerm || sTerm == '') {
       throw 'Enter term';
