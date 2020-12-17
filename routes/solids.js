@@ -138,17 +138,19 @@ router.post('/comment', async (req, res) => {
 });
 
 router.get("/:id", async (req, res) => {
+
     if (!isValidId(req.params.id)) {
         error(res, 400, "id is not a valid UUID")
         return;
     }
+		
     try {
         const solid = await solids.getSolidById(req.params.id);
-        solid.timestamp = solid.timestamp.toDateString();
+
+        //solid.timestamp = solid.timestamp.toDateString();
         const creator = await users.getUserByUsername(solid.postedBy);
         let solidComments = [];
-	
-		
+
         for (comment of solid.comments) {
             const commentObject = await comments.getCommentById(comment);
 			console.log(commentObject);
@@ -194,5 +196,59 @@ router.get("/:id", async (req, res) => {
     
 
 })
+
+router.put("/", async (req, res) => {
+  const {
+	id,
+    location,
+    description,
+    postedBy,
+    accepted,
+    completed,
+    comments,
+    buddyID,
+    price,
+    timestamp,
+    tags,
+  } = req.body;
+  if (
+    !location ||
+    !description ||
+    !postedBy ||
+    accepted === null ||
+    completed === null ||
+    !comments ||
+    !price ||
+    !timestamp ||
+    !tags
+  )
+    throw "Error: All fields required";
+  if (
+    !location.trim() ||
+    !description.trim() ||
+    !postedBy.trim() ||
+    !Number.isInteger(price) ||
+    !timestamp.trim()
+  )
+    throw "Error: All fields require non-empty strings";
+	console.log(req.body);
+	console.log(postedBy);
+  const userInfo = await users.getUserByUsername(postedBy);
+  console.log("HERE");
+  console.log(id);
+  let newSolid = await solids.updateSolid(
+	id,
+    userInfo.zip,
+    description,
+    postedBy,
+    accepted,
+    completed,
+    comments,
+    buddyID,
+    price,
+    timestamp,
+    tags
+  );
+});
 
 module.exports = router;
