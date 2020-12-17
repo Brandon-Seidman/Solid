@@ -10,14 +10,14 @@ body {
   <li class="nbli"><a class="homenb nb" href="/mainview">Home</a></li>
   <li class="nbli"><a class="nb" href="/search">Search</a></li>
   <li class="nbli"><a class="nb" href="/nearby">Solids Near Me</a></li>
-  <li class="nbli"><a class="nb" href="">Account</a></li>
+  <li class="nbli"><a class="nb" href="/account">Account</a></li>
   <li class="nbli"><a class="nb" href="">Become a Buddy</a></li>
   <li class="nbli"><a class="nb" href="/logout">Logout</a></li>
 </ul>
 
 <h1 class="titlesearch">SOLIDS NEAR YOU<h1>
 
-<form action="/nearby" method="POST">
+<form action="/nearby" method="POST" class="forms">
 <label for="search" class="smalllabel">
   Zip +/-: <input type="range" name="searchTerm" id="searchTerm" class="submits" min="0" max="100" oninput="slide()"><span id="demo"></span>
 </label>
@@ -37,4 +37,6 @@ body {
   </a>
 {{/each}}
 
+<div>
 <p class="error">{{error}}</p>
+</div>

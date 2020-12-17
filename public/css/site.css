@@ -226,7 +226,8 @@ a {
 }
 
 .error{
-  margin-top: 15px;
+  margin:auto;
+  margin-top: 30px;
 }
 
 /* Individual Solid Page */
@@ -238,4 +239,10 @@ a {
   flex-direction: column;
   border-style: double;
   width: auto;
+}
+
+.forms{
+  width: 600px;
+  margin-top: 30px;
+  text-align: center;
 }
