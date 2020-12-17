@@ -119,6 +119,7 @@ router.post('/comment', async (req, res) => {
         error(res, 403, "You must be logged in to post a comment");
         return;
     }
+
     const user = await users.getUserByUsername(req.cookies.AuthCookie);
 
     if (!user) {
@@ -126,7 +127,7 @@ router.post('/comment', async (req, res) => {
         return;
     }
     
-    const comment = await comments.addComment(user._id, req.body.comment, solid._id, new Date());
+    const comment = await comments.addComment(user.username, req.body.comment, solid._id, new Date());
 
     solid.comments.push(comment._id)
 
@@ -144,12 +145,15 @@ router.get("/:id", async (req, res) => {
     try {
         const solid = await solids.getSolidById(req.params.id);
         solid.timestamp = solid.timestamp.toDateString();
-        const creator = await users.getUserById(solid.postedBy);
+        const creator = await users.getUserByUsername(solid.postedBy);
         let solidComments = [];
+	
+		
         for (comment of solid.comments) {
             const commentObject = await comments.getCommentById(comment);
+			console.log(commentObject);
             commentObject.timestamp = commentObject.timestamp.toDateString();
-            const commentPoster = await users.getUserById(commentObject.commentBy);
+            const commentPoster = await users.getUserByUsername(commentObject.commentBy);
             commentObject.commentBy = commentPoster.username;
             solidComments.push(commentObject);
         }
