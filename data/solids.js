@@ -11,6 +11,51 @@ function isInList(x, lst){
   return false;
 }
 
+function findLocationRange(loc,x){
+  let num1 = parseInt(loc) + x;
+  let num2 = parseInt(loc) - x;
+
+  if (num1.toString().length == 6){
+    num1 = '99999';
+  }
+  else{
+    num1 = num1.toString();
+  }
+  if(num1.length == 4){
+    num1 = '0' + num1;
+  }
+  else if(num1.length == 3){
+    num1 = '00' + num1;
+  }
+  else if(num1.length == 2){
+    num1 = '000' + num1;
+  }
+  else if(num1.length == 1){
+    num1 = '0000' + num1;
+  }
+
+  if(num2 <= 0){
+    num2 = '00001';
+  }
+  else{
+    num2 = num2.toString();
+  }
+  if(num2.length == 4){
+    num2 = '0' + num2;
+  }
+  else if(num2.length == 3){
+    num2 = '00' + num2;
+  }
+  else if(num2.length == 2){
+    num2 = '000' + num2;
+  }
+  else if(num1.length == 1){
+    num2 = '0000' + num2;
+  }
+
+  return [num1, num2];
+}
+
 let exportedMethods = {
   async getAllSolids() {
     const solidCollection = await solids();
@@ -29,6 +74,14 @@ let exportedMethods = {
   async getSolidByLocation(loc) {
     const solidCollection = await solids();
     const solid = await solidCollection.find({ location: loc });
+    if (!solid) throw "solid(s) not found";
+    return solid.toArray();
+  },
+
+  async getSolidByLocationRange(loc,x) {
+    let locR = findLocationRange(loc,x);
+    const solidCollection = await solids();
+    const solid = await solidCollection.find({ location: {$lte: locR[0], $gte: locR[1]}  });
     if (!solid) throw "solid(s) not found";
     return solid.toArray();
   },

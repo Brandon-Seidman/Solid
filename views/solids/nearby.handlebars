@@ -1,3 +1,5 @@
+<script src="../../public/js/slider.js"></script>
+
 <style>
 body {
   background-color: #dae0da;
@@ -8,35 +10,22 @@ body {
   <li class="nbli"><a class="homenb nb" href="/mainview">Home</a></li>
   <li class="nbli"><a class="nb" href="/search">Search</a></li>
   <li class="nbli"><a class="nb" href="/nearby">Solids Near Me</a></li>
-  <li class="nbli"><a class="nb" href="/account">Account</a></li>
+  <li class="nbli"><a class="nb" href="">Account</a></li>
   <li class="nbli"><a class="nb" href="">Become a Buddy</a></li>
   <li class="nbli"><a class="nb" href="/logout">Logout</a></li>
 </ul>
 
-<h1 class="titlesearch">SOLID TAG SEARCH<h1>
+<h1 class="titlesearch">SOLIDS NEAR YOU<h1>
 
-<form action="/searchst" method="POST">
+<form action="/nearby" method="POST">
 <label for="search" class="smalllabel">
-  Tags:
+  Zip +/-: <input type="range" name="searchTerm" id="searchTerm" class="submits" min="0" max="100" oninput="slide()"><span id="demo"></span>
 </label>
-<select name="searchTerm" id="searchTerm" class="submits">
-  <option value='Shopping'>Shopping</option>
-  <option value='Pickup'>Pickup</option>
-  <option value='Small Task'>Small Task</option>
-  <option value='Large Task'>Large Task</option>
-  <option value='Car Needed'>Car Needed</option>
-  <option value='Art'>Art</option>
-  <option value='Computers'>Computers</option>
-  <option value='Labor'>Labor</option>
-  <option value='Writing'>Writing</option>
-  <option value='Household'>Household</option>
-  <option value='Quick'>Quick</option>
-</select>
 <input type="submit" value="Submit" id="button" class="submits">
 </form>
 
 {{#each solid}}
-  <a class="solidcardlink" href = "/solids/{{this._id}}">
+  <a class="solidcardlink" href = "">
     <div class="solidcard">
       <div class="cardelem">{{this.postedBy}}</div>
       <div class="cardelem">{{this.description}}</div>

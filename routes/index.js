@@ -10,6 +10,7 @@ const searchst = require("./searchst");
 const searchlo = require("./searchlo");
 const account = require("./account");
 const userData = require("../data/users");
+const nearby = require("./nearby");
 const dbConnection = require("../config/mongoConnection");
 //const post = require("./post");
 
@@ -25,6 +26,7 @@ const constructorMethod = (app) => {
   app.use("/searchlo", searchlo);
   app.use("/account", account);
   app.use("/solids", solids);
+  app.use("/nearby", nearby);
   //app.use(logging);
   app.get("/", async (req, res) => {
     if (!req.cookies.AuthCookie) {
