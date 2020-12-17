@@ -142,7 +142,7 @@ async function main() {
       "None",
       300,
       new Date(),
-      ["Small Task", "Household"]
+      ["small_task", "household"]
     );
     const solid2 = await solidData.addSolid(
       `${user.zip}`,
@@ -154,7 +154,7 @@ async function main() {
       "None",
       300,
       new Date(),
-      ["Quick", "Household"]
+      ["quick", "household"]
     );
     const userSolids = [solid1._id, solid2._id];
     userData.updateUser(
