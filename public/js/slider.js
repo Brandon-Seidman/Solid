@@ -1,7 +1,8 @@
-var slider = document.getElementById("searchTerm");
-var output = document.getElementById("demo");
-output.innerHTML = slider.value;
-
-slider.oninput = function() {
-  output.innerHTML = this.value;
+function slide() {
+  var slider = document.getElementById("searchTerm");
+  document.getElementById("demo").innerHTML = slider.value;
 }
+
+window.addEventListener('load', (event) => {
+    document.getElementById("demo").innerHTML = 50;
+});

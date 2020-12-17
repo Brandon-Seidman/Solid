@@ -19,9 +19,8 @@ body {
 
 <form action="/neaby" method="POST">
 <label for="search" class="smalllabel">
-  Zip +/-: <input type="range" name="searchTerm" id="searchTerm" class="submits" min="0" max="100">
+  Zip +/-: <input type="range" name="searchTerm" id="searchTerm" class="submits" min="0" max="100" oninput="slide()"><span id="demo"></span>
 </label>
-<p><span id="demo"></span></p>
 <input type="submit" value="Submit" id="button" class="submits">
 </form>
 
