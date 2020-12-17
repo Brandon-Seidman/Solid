@@ -24,7 +24,7 @@ router.get("/", async (req, res) => {
     //console.log(username);
     const zip = await users.getUserZipByUsername(username);
     //console.log(zip);
-    const solid = await solids.getSolidByLocationRange(zip,5);
+    const solid = await solids.getSolidByLocationRange(zip,50);
     //console.log(solid);
     if(solid.length == 0){
       return res.render("solids/nearby.handlebars", {
