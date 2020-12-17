@@ -1,4 +1,4 @@
-<script src="https://kit.fontawesome.com/9764bc42f4.js" crossorigin="anonymous"></script>
+<script src="../../public/js/slider.js"></script>
 
 <style>
 body {
@@ -19,8 +19,9 @@ body {
 
 <form action="/neaby" method="POST">
 <label for="search" class="smalllabel">
-  Enter Zip Code: <input type="text" name="searchTerm" id="searchTerm" placeholder="ex: 10301" class="submits">
+  Zip +/-: <input type="range" name="searchTerm" id="searchTerm" class="submits" min="0" max="100">
 </label>
+<p><span id="demo"></span></p>
 <input type="submit" value="Submit" id="button" class="submits">
 </form>
 

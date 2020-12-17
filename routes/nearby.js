@@ -18,16 +18,30 @@ let authentication = async function (req, res, next) {
 
 router.use(authentication);
 router.get("/", async (req, res) => {
-  let username = req.cookies.AuthCookie;
-  //console.log(username);
-  const zip = await users.getUserZipByUsername(username);
-  //console.log(zip);
-  const solid = await solids.getSolidByLocationRange(zip,5);
-  //console.log(solid);
-  return res.render("solids/nearby.handlebars", {
-	title: "Neaby Solids",
-  solid: solid
-  });
+  try{
+    let username = req.cookies.AuthCookie;
+    //console.log(username);
+    const zip = await users.getUserZipByUsername(username);
+    //console.log(zip);
+    const solid = await solids.getSolidByLocationRange(zip,5);
+    //console.log(solid);
+    if(solid.length == 0){
+      return res.render("solids/nearby.handlebars", {
+        title: "Neaby Solids",
+        error: "No Solids Near You."
+      });
+    }else{
+      return res.render("solids/nearby.handlebars", {
+    	title: "Neaby Solids",
+      solid: solid
+      });
+    };
+  }catch(e){
+    res.status(404).render("solids/nearby.handlebars", {
+      title: "Neaby Solids",
+      error: "Error Finding Solids."
+    });
+  }
 });
 
 // router.get("/", async (req, res) => {
