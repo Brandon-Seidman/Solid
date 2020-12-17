@@ -86,20 +86,20 @@
             newSolid.prepend(card);
             let mainPage = $("#cardArea");
             mainPage.prepend(newSolid);
-          });
-          let response = await fetch("/mainview", {
-            method: "POST",
-            headers: {
-              Accept: "application/json, text/plain, */*",
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(solid),
-          });
-          console.log(response);
 
-          if (response.status !== 200) {
-            throw "An Error Occured";
-          }
+            let response = await $.ajax("/mainview", {
+              type: "POST",
+              url: "/mainview",
+              dataType: "json",
+              data: JSON.stringify(solid),
+            });
+            console.log(response);
+  
+            if (response.status !== 200) {
+              throw "An Error Occured";
+            }
+          });
+         
         } catch (e) {
           console.log(e);
           const messages = document.getElementById("messages");
