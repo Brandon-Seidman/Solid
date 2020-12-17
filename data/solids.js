@@ -21,7 +21,7 @@ function findLocationRange(loc,x){
   else{
     num1 = num1.toString();
   }
-  else if(num1.length == 4){
+  if(num1.length == 4){
     num1 = '0' + num1;
   }
   else if(num1.length == 3){
@@ -40,7 +40,7 @@ function findLocationRange(loc,x){
   else{
     num2 = num2.toString();
   }
-  else if(num2.length == 4){
+  if(num2.length == 4){
     num2 = '0' + num2;
   }
   else if(num2.length == 3){
@@ -81,7 +81,7 @@ let exportedMethods = {
   async getSolidByLocationRange(loc,x) {
     let locR = findLocationRange(loc,x);
     const solidCollection = await solids();
-    const solid = await solidCollection.find({ location: ($gte:locR[0], $lte: locR[1]}  });
+    const solid = await solidCollection.find({ location: {$lte: locR[0], $gte: locR[1]}  });
     if (!solid) throw "solid(s) not found";
     return solid.toArray();
   },
