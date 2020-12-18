@@ -23,6 +23,8 @@
           const price = document.getElementById("price").value;
           const user = document.getElementById("name").value;
 		  const id = document.getElementById("id").value;
+		  const zip = document.getElementById("zip").value;
+		  
           const formTags = [
             document.getElementById("shopping"),
             document.getElementById("pickup"),
@@ -49,19 +51,18 @@
           $.ajax().then(function () {
             var newSolid = $("<a></a>", { class: "solidcardlink" });
             var card = $("<div class='solidcard'></div>", {});
-            var elem = $(`<div class="cardelem" >${user}</div>`, {});
-
+            var elem = $(`<h2 class="cardelem" >${user}</h2>`, {});
             card.append(elem);
-            elem = $(`<div class="cardelem" >${body}</div>`, {});
+			 elem = $(`<h2 class="cardelem" >${new Date()}</h2>`, {});
+            card.append(elem);
+			elem = $(`<p class="cardelem" >${zip}</p>`, {});
+            card.append(elem);
+			 elem = $(`<pclass="cardelem" >$${price}</p>`, {});
+            card.append(elem)
+            elem = $(`<p class="cardelem" >${body}</p>`, {});
             // elem.attr("text", body);
             card.append(elem);
-            elem = $(`<div class="cardelem" >$${price}</div>`, {});
-            card.append(elem);
-            elem = $(`<div class="cardelem" >07030</div>`, {});
-            card.append(elem);
-            elem = $(`<div class="cardelem" >${new Date()}</div>`, {});
-            card.append(elem);
-            elem = $(`<div class="cardbot" >${tags}</div>`, {});
+            elem = $(`<p class="cardbot" >${tags}</p>`, {});
             card.append(elem);
             newSolid.prepend(card);
             let mainPage = $("#card");

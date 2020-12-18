@@ -24,6 +24,7 @@
           const price = document.getElementById("price").value;
 
           const user = document.getElementById("name").value;
+
           const error = document.getElementById("error");
 
           const formTags = [
