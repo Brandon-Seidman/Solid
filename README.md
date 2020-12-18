@@ -11,3 +11,8 @@ Users also have the ability to become contractors which will grant them access t
 1. in console type "npm run seed" to fill the database and wait until "Database successfully seeded" message
 2. next you can type "npm start" to run the server 
 3. then you can go to localhost:3000
+
+#Github
+https://github.com/Brandon-Seidman/Solid
+
+#The Seed is included in the directory
