@@ -51,14 +51,14 @@
           $("#solidPostModal").modal("toggle");
           $.ajax().then(function () {
             var newSolid = $("<a></a>", { class: "solidcardlink" });
-            var card = $("<div class='solidcard'></div>", {});
+            var card = $("<div class='solidContent'></div>", {});
             var elem = $(`<h2 class="cardelem" >${user}</h2>`, {});
             card.append(elem);
 			 elem = $(`<h2 class="cardelem" >${new Date()}</h2>`, {});
             card.append(elem);
 			elem = $(`<p class="cardelem" >${zip}</p>`, {});
             card.append(elem);
-			 elem = $(`<pclass="cardelem" >$${price}</p>`, {});
+			 elem = $(`<p class="cardelem" >$${price}</p>`, {});
             card.append(elem)
             elem = $(`<p class="cardelem" >${body}</p>`, {});
             // elem.attr("text", body);
@@ -66,7 +66,7 @@
             elem = $(`<p class="cardbot" >${tags}</p>`, {});
             card.append(elem);
             newSolid.prepend(card);
-            let mainPage = $("#card");
+            let mainPage = $("#text");
             mainPage.replaceWith(newSolid);
           });
           const solid = {

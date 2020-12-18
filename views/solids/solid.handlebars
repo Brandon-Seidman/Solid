@@ -11,7 +11,7 @@
 <div class="solidcard" id="card">
     <div class="solidContent">
         <h1 class="margin">Solid</h1>
-        <div class="solidContent">
+        <div class="solidContent" id="text">
             <h2>Created by: {{creator.username}}</h2>
             <h2> {{solid.timestamp}}</h2>
             <p>Location: {{solid.location}}</p>
@@ -116,90 +116,15 @@
                   <input type="checkbox" class="form-check-input" id="quick" />
                   <label class="form-check-label" for="quick">Quick</label>
                 </div>
-
-        {{!-- modal for post a solid form --}}
-        <div class="modal fade" id="solidPostModal" role="dialogue" tabindex="-1" aria-labelledby="modal"
-            aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <form id="post_solid" class="form">
-                            <div class="mb-3">
-                                <label for="body" class="form-label">Edit Your Solid.</label>
-                                <textarea type="body" rows="3" cols="30" class="form-control" id="body"></textarea>
-                            </div>
-                            <div class="input-group mb-3">
-                                <div class="container">
-                                    <div class="col align-self-center">
-                                        <label for="price" class="form-label">Price</label>
-                                        <input type="text" class="form-control" id="price" placeholder="$"
-                                            aria-label="Price">
-                                    </div>
-                                    <div>
-                                        <input type="hidden" id="name" value={{creator.username}} />
-                                    </div>
-                                    <div>
-                                        <input type="hidden" id="id" value={{solid._id}} />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mb-3 form-check">
-                                <div>
-                                    <input type="checkbox" class="form-check-input" id="shopping" />
-                                    <label class="form-check-label" for="shopping">Shopping</label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" class="form-check-input" id="pickup" />
-                                    <label class="form-check-label" for="pickup">Pickup</label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" class="form-check-input" id="small_task" />
-                                    <label class="form-check-label" for="small_task">Small Task</label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" class="form-check-input" id="large_task" />
-                                    <label class="form-check-label" for="large_task">Large Task</label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" class="form-check-input" id="car_needed" />
-                                    <label class="form-check-label" for="car_needed">Car Needed</label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" class="form-check-input" id="art" />
-                                    <label class="form-check-label" for="art">Art</label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" class="form-check-input" id="computer" />
-                                    <label class="form-check-label" for="computer">Computer</label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" class="form-check-input" id="labor" />
-                                    <label class="form-check-label" for="labor">Labor</label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" class="form-check-input" id="writing" />
-                                    <label class="form-check-label" for="writing">Writing</label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" class="form-check-input" id="household" />
-                                    <label class="form-check-label" for="household">Household</label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" class="form-check-input" id="quick" />
-                                    <label class="form-check-label" for="quick">Quick</label>
-                                </div>
-
-                            </div>
-                            <div id="messages">
-                            </div>
-                            <button type="submit" value="Submit" data-dismis="modal">
-                                Submit
-                            </button>
-                        </form>
+				<button type="submit" value="Submit">
+					Submit
+				</button>
+   
                     </div>
                 </div>
             </div>
         </div>
+		</div>
         {{else}}
         <form action="/solids/accept" method="POST">
             <label for="accept">
@@ -210,8 +135,10 @@
             </label>
         </form>
         {{/if}}
+		 </form>
     </div>
 </div>
+
 <div id="comment-section">
     {{#each comments}}
     <div class="comment">
@@ -230,11 +157,10 @@
 
             <input type="hidden" name="id" value="{{solid._id}}" />
             <input type="text" id="comment-input" name="comment" placeholder="Enter your comment here" />
-
-        </label>
-        <button type="submit" value="Submit">
+		<button type="submit" value="Submit" form="comment-form">
             Submit
         </button>
+        </label>
     </form>
 </div>
 
