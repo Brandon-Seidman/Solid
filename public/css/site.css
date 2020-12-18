@@ -150,16 +150,43 @@ a {
 .solidcardlink {
   text-decoration: none;
 }
-
+.margin {
+  margin-top: 90px;
+}
 .solidcard {
   margin-top: 30px;
   border-style: double;
+  box-shadow: 20px 20px 10px grey;
   display: flex;
   flex-wrap: wrap;
+  background: #2c3836;
+  border-radius: 6px;
   flex-direction: column;
   flex: 1;
   margin-left: 10px;
   margin-right: 10px;
+  align-items: center;
+}
+.solidContent {
+  box-shadow: inset;
+  display: flex;
+  flex-wrap: wrap;
+  border-radius: 6px;
+  background: #f3f5f5;
+  flex-direction: column;
+  flex: 1;
+  margin: 20px;
+  align-items: center;
+}
+.solidText {
+  margin: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  border-radius: 6px;
+  background: #f3f5f5;
+  flex-direction: column;
+  flex: 1;
+
   align-items: center;
 }
 
@@ -225,8 +252,8 @@ a {
   font-size: 30px;
 }
 
-.error{
-  margin:auto;
+.error {
+  margin: auto;
   margin-top: 30px;
 }
 
@@ -241,21 +268,21 @@ a {
   width: auto;
 }
 
-.forms{
+.forms {
   width: 600px;
   text-align: center;
   margin: auto;
   margin-top: 30px;
 }
 
-.formstag{
+.formstag {
   width: 300px;
   text-align: center;
   margin: auto;
   margin-top: 30px;
 }
 
-.formsnear{
+.formsnear {
   width: 400px;
   text-align: center;
   margin: auto;

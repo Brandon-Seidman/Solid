@@ -22,7 +22,7 @@
 
           const body = document.getElementById("body").value;
           const price = document.getElementById("price").value;
-
+          const zip = document.getElementById("zip").value;
           const user = document.getElementById("name").value;
 
           const error = document.getElementById("error");
@@ -55,7 +55,7 @@
           //make call to server
           document.getElementById("post_solid").reset();
           const solid = {
-            location: "Not Provided",
+            location: zip,
             description: body,
             postedBy: user,
             accepted: false,
@@ -68,23 +68,39 @@
           };
 
           $.ajax().then(function () {
-            var newSolid = $("<a></a>", { class: "solidcardlink" });
+            var newSolid = $("<a class='solidCardLink'></a>", {});
             var card = $("<div class='solidcard'></div>", {});
-            var elem = $(`<div class="cardelem" >${user}</div>`, {});
+            var solidContent = $("<div class='solidContent'></div>", {});
+            var cardText = $("<div class='solidText'></div>", {});
+            var elem = $(
+              `<div class="cardelem" ><p>Posted by: ${user}</p></div>`,
+              {}
+            );
 
-            card.append(elem);
-            elem = $(`<div class="cardelem" >${body}</div>`, {});
+            cardText.append(elem);
+            elem = $(
+              `<div class="cardelem" ><p>The Job: ${body}</p></div>`,
+              {}
+            );
             // elem.attr("text", body);
-            card.append(elem);
-            elem = $(`<div class="cardelem" >$${price}</div>`, {});
-            card.append(elem);
-            elem = $(`<div class="cardelem" >07030</div>`, {});
-            card.append(elem);
-            elem = $(`<div class="cardelem" >${new Date()}</div>`, {});
-            card.append(elem);
-            elem = $(`<div class="cardbot" >${tags}</div>`, {});
-            card.append(elem);
-            newSolid.prepend(card);
+            cardText.append(elem);
+            elem = $(`<div class="cardelem"><p>$${price}</p></div>`, {});
+            cardText.append(elem);
+            elem = $(`<div class="cardelem" ><p>Zipcode: ${zip}</p></div>`, {});
+            cardText.append(elem);
+            elem = $(
+              `<div class="cardelem" ><p>Posted on: ${new Date()}<p></div>`,
+              {}
+            );
+            cardText.append(elem);
+            elem = $(
+              `<div class="cardelembot" ><p>Tags: ${tags}</p></div>`,
+              {}
+            );
+            cardText.append(elem);
+            solidContent.prepend(cardText);
+            card.append(solidContent);
+            newSolid.append(card);
             let mainPage = $("#cardArea");
             mainPage.prepend(newSolid);
           });
@@ -96,8 +112,6 @@
             },
             body: JSON.stringify(solid),
           });
-
-          console.log(response);
 
           if (response.status !== 200) {
             throw "An Error Occured";

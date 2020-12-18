@@ -1,35 +1,52 @@
-<link rel="stylesheet" type="text/css" href="../../public/css/bgcolor.css" media="screen"/>
+<link rel="stylesheet" type="text/css" href="../../public/css/bgcolor.css" media="screen" />
 <ul class="nblist">
   <li class="nbli"><a class="homenb nb" href="/mainview">Home</a></li>
   <li class="nbli"><a class="nb" href="/search">Search</a></li>
   <li class="nbli"><a class="nb" href="/nearby">Solids Near Me</a></li>
   <li class="nbli"><a class="nb" href="">Account</a></li>
-  <li class="nbli"><a class="nb" href="">Become a Buddy</a></li>
   <li class="nbli"><a class="nb" href="/logout">Logout</a></li>
 </ul>
 
 <h1 class="titlesearch">LOCATION SEARCH<h1>
 
-<form action="/searchlo" method="POST" class="forms">
-<label for="search" class="smalllabel">
-  Enter Zip Code: <input type="text" name="searchTerm" id="searchTerm" placeholder="ex: 10301" class="submits">
-</label>
-<input type="submit" value="Submit" id="button" class="submits">
-</form>
+    <form action="/searchlo" method="POST" class="forms">
+      <label for="search" class="smalllabel">
+        Enter Zip Code: <input type="text" name="searchTerm" id="searchTerm" placeholder="ex: 10301" class="submits">
+      </label>
+      <input type="submit" value="Submit" id="button" class="submits">
+    </form>
 
-{{#each solid}}
-  <a class="solidcardlink" href = "/solids/{{this._id}}">
-    <div class="solidcard">
-      <div class="cardelem">{{this.postedBy}}</div>
-      <div class="cardelem">{{this.description}}</div>
-      <div class="cardelem">${{this.price}}</div>
-      <div class="cardelem">{{this.location}}</div>
-      <div class="cardelem">{{this.timestamp}}</div>
-      <div class="cardelembot">{{this.tags}}</div>
+    <div id="cardArea">
+      {{#each solid}}
+      <a class="solidcardlink" href="/solids/{{this._id}}">
+        <div class="solidcard">
+          <div class="solidContent">
+            <div class='solidText'>
+              <div class="cardelem">
+                <p>Posted By: {{this.postedBy}}</p>
+              </div>
+              <div class="cardelem">
+                <p>The Job: {{this.description}}</p>
+              </div>
+              <div class="cardelem">
+                <p>${{this.price}}</p>
+              </div>
+              <div class="cardelem">
+                <p>Zipcode: {{this.location}}</p>
+              </div>
+              <div class="cardelem">
+                <p>Posted on:{{this.timestamp}}</p>
+              </div>
+              <div class="cardelembot">
+                <p>Tags: {{this.tags}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </a>
+
+      {{/each}}
     </div>
-  </a>
-{{/each}}
-
-<div>
-<p class="error">{{error}}</p>
-</div>
+    <div>
+      <p class="error">{{error}}</p>
+    </div>

@@ -1,9 +1,9 @@
 <script src="https://kit.fontawesome.com/9764bc42f4.js" crossorigin="anonymous"></script>
 
 <style>
-body {
-  background-color: #dae0da;
-}
+  body {
+    background-color: #dae0da;
+  }
 </style>
 
 <ul class="nblist">
@@ -11,24 +11,42 @@ body {
   <li class="nbli"><a class="nb" href="/search">Search</a></li>
   <li class="nbli"><a class="nb" href="/nearby">Solids Near Me</a></li>
   <li class="nbli"><a class="nb" href="/account">Account</a></li>
-  <li class="nbli"><a class="nb" href="">Become a Buddy</a></li>
   <li class="nbli"><a class="nb" href="/logout">Logout</a></li>
 </ul>
 
 <div>
-<h1> title </h1>
+  <h1 class="margin"> {{user}}'s Posted Solids!</h1>
 </div>
 
 
-{{#each solid}}
-    <a class="solidcardlink" href="/solids/{{this._id}}">
-      <div class="solidcard">
-        <div class="cardelem">{{this.postedBy}}</div>
-        <div class="cardelem">{{this.description}}</div>
-        <div class="cardelem">${{this.price}}</div>
-        <div class="cardelem">{{this.location}}</div>
-        <div class="cardelem">{{this.timestamp}}</div>
-        <div class="cardelembot">{{this.tags}}</div>
+<div id="cardArea">
+  {{#each solid}}
+  <a class="solidcardlink" href="/solids/{{this._id}}">
+    <div class="solidcard">
+      <div class="solidContent">
+        <div class='solidText'>
+          <div class="cardelem">
+            <p>Posted By: {{this.postedBy}}</p>
+          </div>
+          <div class="cardelem">
+            <p>The Job: {{this.description}}</p>
+          </div>
+          <div class="cardelem">
+            <p>${{this.price}}</p>
+          </div>
+          <div class="cardelem">
+            <p>Zipcode: {{this.location}}</p>
+          </div>
+          <div class="cardelem">
+            <p>Posted on:{{this.timestamp}}</p>
+          </div>
+          <div class="cardelembot">
+            <p>Tags: {{this.tags}}</p>
+          </div>
+        </div>
       </div>
-    </a>
-{{/each}}
+    </div>
+  </a>
+
+  {{/each}}
+</div>
